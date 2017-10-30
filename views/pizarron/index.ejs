@@ -1,3 +1,12 @@
+
+<script type="text/javascript">
+//var dependencias = JSON.parse('<%- JSON.stringify(dependencias) %>');
+var planes = JSON.parse('<%- JSON.stringify(planes) %>');
+var ciclos = JSON.parse('<%- JSON.stringify(ciclos) %>');
+var grados = JSON.parse('<%- JSON.stringify(grados) %>');
+var stock = JSON.parse('<%- JSON.stringify(stock) %>');
+</script>
+
 <h1>Búsqueda de grupos</h1>
 
 <div class="panel panel-default">
@@ -40,9 +49,9 @@
                 Plan <span class="caret"></span>
               </button>
               <ul class="dropdown-menu" aria-labelledby="plan">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
+                <% planes.forEach(function(plan){ -%>
+                  <li><a href="#" data="<%= plan.PlanId %>"><%= plan.PlanNombre %></a></li>
+                <% }) -%>
               </ul>
             </div>
 
@@ -51,9 +60,9 @@
                 Ciclo <span class="caret"></span>
               </button>
               <ul class="dropdown-menu" aria-labelledby="ciclo">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
+                <% ciclos.forEach(function(ciclo){ -%>
+                  <li><a href="#" data="<%= ciclo.CicloId %>"><%= ciclo.CicloDesc %></a></li>
+                <% }) -%>
               </ul>
             </div>
 
@@ -62,9 +71,9 @@
                 Grado <span class="caret"></span>
               </button>
               <ul class="dropdown-menu" aria-labelledby="grado">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
+                <% grados.forEach(function(grado){ -%>
+                  <li><a href="#" data="<%= grado.GradoId %>"><%= grado.GradoDesc %></a></li>
+                <% }) -%>
               </ul>
             </div>
 
@@ -89,13 +98,11 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <div class="table-responsive">
-          <table class="table">
+          <table class="table" id="stock">
             <thead>
               <tr><th>Liceo</th><th>Plan</th><th>Ciclo</th><th>Grado</th><th>Orientación</th><th>Opción</th><th>Materia</th><th>Grupos</th></tr>
             </thead>
             <tbody>
-              <tr><td>MONTEVIDEO 1</td><td>2006</td><td>2</td><td>5</td><td>--</td><td>FM</td><td>MATEMÁTICA I</td><td class="active"><b>3</b></td></tr>
-              <tr><td>MONTEVIDEO 1</td><td>2006</td><td>2</td><td>5</td><td>--</td><td>FM</td><td>MATEMÁTICA III</td><td class="active"><b>2</b></td></tr>
             </tbody>
           </table>
         </div>
