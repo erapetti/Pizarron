@@ -2,15 +2,11 @@
 <script type="text/javascript">
 var departamentos = <%- JSON.stringify(departamentos) %>;
 var asignaturas = <%- JSON.stringify(asignaturas) %>;
-var dependencias = <%- JSON.stringify(dependencias) %>;
-var planes = <%- JSON.stringify(planes) %>;
-var ciclos = <%- JSON.stringify(ciclos) %>;
-var grados = <%- JSON.stringify(grados) %>;
-var stock  = <%- JSON.stringify(stock)  %>;
 </script>
 
-<h1>Búsqueda de grupos</h1>
+<h1>Elección de horas</h1>
 
+<form action="pizarron/resultado" method="post">
 <div class="panel panel-default">
   <div class="panel-body">
 
@@ -18,101 +14,57 @@ var stock  = <%- JSON.stringify(stock)  %>;
       <div class="panel-body">
 
         <div class="row">
-          Departamento:
-          <input type="hidden" name="departamento" id="dd-departamento">
-          <div class="btn-group dropdown">
-            <button id="btn-dd-departamento" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Departamento <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="btn-dd-departamento" dd="departamento">
-              <% departamentos.forEach(function(departamento){ -%>
-                <li><a href="#" dd="departamento" data="<%= departamento.DeptoId %>"><%= departamento.DeptoNombre %></a></li>
-              <% }) -%>
-            </ul>
+          <div class="col-sm-4">
+            <h2>Búsqueda de grupos</h2>
           </div>
-          Asignatura:
-          <input type="hidden" name="asignatura" id="dd-asignatura">
-          <div class="btn-group dropdown">
-            <button id="btn-dd-asignatura" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Asignatura <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="btn-dd-asignatura" dd="asignatura">
-              <% asignaturas.forEach(function(asignatura){ -%>
-                <li><a href="#" dd="asignatura" data="<%= asignatura.AsignId %>"><%= asignatura.AsignDesc %></a></li>
-              <% }) -%>
-            </ul>
-          </div>
-        </div>
-
-        <div class="row">
-          Filtrar por:
-          <div class="btn-group" role="group" aria-label="filtros">
-
-            <input type="hidden" name="plan" id="dd-plan">
-            <div class="btn-group dropdown">
-              <button id="btn-dd-plan" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Plan <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="btn-id-plan" dd="plan">
-                <% planes.forEach(function(plan){ -%>
-                  <li><a href="#" dd="plan" data="<%= plan.PlanId %>"><%= plan.PlanNombre %></a></li>
-                <% }) -%>
-              </ul>
+          <div class="col-sm-8">
+            <div class="row">
+              <div class="col-sm-2 nombre">
+                Departamento:
+              </div>
+              <div class="col-sm-6">
+                <input type="hidden" name="departamento" id="dd-departamento" value="<%= departamento %>">
+                <div class="btn-group dropdown">
+                  <button id="btn-dd-departamento" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Departamento <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="btn-dd-departamento" dd="departamento">
+                    <% departamentos.forEach(function(departamento){ -%>
+                      <li><a href="#" dd="departamento" data="<%= departamento.DeptoId %>"><%= departamento.DeptoNombre %></a></li>
+                    <% }) -%>
+                  </ul>
+                </div>
+              </div>
             </div>
-
-            <input type="hidden" name="ciclo" id="dd-ciclo">
-            <div class="btn-group dropdown">
-              <button id="btn-dd-ciclo" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Ciclo <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="btn-dd-ciclo" dd="ciclo">
-                <% ciclos.forEach(function(ciclo){ -%>
-                  <li><a href="#" dd="ciclo" data="<%= ciclo.CicloId %>"><%= ciclo.CicloDesc %></a></li>
-                <% }) -%>
-              </ul>
+            <div class="row">
+              <div class="col-sm-2 nombre">
+                Asignatura:
+              </div>
+              <div class="col-sm-6">
+                <input type="hidden" name="asignatura" id="dd-asignatura" value="<%= asignatura %>">
+                <div class="btn-group dropdown">
+                  <button id="btn-dd-asignatura" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Asignatura <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="btn-dd-asignatura" dd="asignatura">
+                    <% asignaturas.forEach(function(asignatura){ -%>
+                      <li><a href="#" dd="asignatura" data="<%= asignatura.AsignId %>"><%= asignatura.AsignDesc %></a></li>
+                    <% }) -%>
+                  </ul>
+                </div>
+              </div>
             </div>
-
-            <input type="hidden" name="grado" id="dd-grado">
-            <div class="btn-group dropdown">
-              <button id="btn-dd-grado" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Grado <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="btn-dd-grado" dd="grado">
-                <!-- <% grados.forEach(function(grado){ -%>
-                  <li><a href="#" dd="grado" data="<%= grado.GradoId %>"><%= grado.GradoDesc %></a></li>
-                <% }) -%> -->
-              </ul>
+            <div class="row">
+              <div class="col-sm-8">
+                <input type="submit" value="Buscar">
+              </div>
             </div>
-
-            <input type="hidden" name="materia" id="dd-materia">
-            <div class="btn-group dropdown">
-              <button id="btn-dd-materia" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Materia <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="btn-dd-materia" dd="materia">
-              </ul>
-            </div>
-
           </div>
         </div>
 
-      </div>
-    </div>
-
-    <h2>Grupos encontrados:</h2>
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <div class="table-responsive">
-          <table class="table" id="stock">
-            <thead>
-              <tr><th>Liceo</th><th>Plan</th><th>Ciclo</th><th>Grado</th><th>Orientación</th><th>Opción</th><th>Materia</th><th>Grupos</th></tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-        </div>
       </div>
     </div>
 
   </div>
 </div>
+</form>
