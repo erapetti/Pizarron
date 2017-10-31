@@ -19,24 +19,26 @@ var stock  = <%- JSON.stringify(stock)  %>;
 
         <div class="row">
           Departamento:
+          <input type="hidden" name="departamento" id="dd-departamento">
           <div class="btn-group dropdown">
-            <button id="departamento" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button id="btn-dd-departamento" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Departamento <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu" aria-labelledby="departamento">
+            <ul class="dropdown-menu" aria-labelledby="btn-dd-departamento" dd="departamento">
               <% departamentos.forEach(function(departamento){ -%>
-                <li><a href="#" data="<%= departamento.DeptoId %>"><%= departamento.DeptoNombre %></a></li>
+                <li><a href="#" dd="departamento" data="<%= departamento.DeptoId %>"><%= departamento.DeptoNombre %></a></li>
               <% }) -%>
             </ul>
           </div>
           Asignatura:
+          <input type="hidden" name="asignatura" id="dd-asignatura">
           <div class="btn-group dropdown">
-            <button id="asignatura" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button id="btn-dd-asignatura" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Asignatura <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu" aria-labelledby="asignatura">
+            <ul class="dropdown-menu" aria-labelledby="btn-dd-asignatura" dd="asignatura">
               <% asignaturas.forEach(function(asignatura){ -%>
-                <li><a href="#" data="<%= asignatura.AsignId %>"><%= asignatura.AsignDesc %></a></li>
+                <li><a href="#" dd="asignatura" data="<%= asignatura.AsignId %>"><%= asignatura.AsignDesc %></a></li>
               <% }) -%>
             </ul>
           </div>
@@ -46,47 +48,48 @@ var stock  = <%- JSON.stringify(stock)  %>;
           Filtrar por:
           <div class="btn-group" role="group" aria-label="filtros">
 
+            <input type="hidden" name="plan" id="dd-plan">
             <div class="btn-group dropdown">
-              <button id="plan" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button id="btn-dd-plan" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Plan <span class="caret"></span>
               </button>
-              <ul class="dropdown-menu" aria-labelledby="plan">
+              <ul class="dropdown-menu" aria-labelledby="btn-id-plan" dd="plan">
                 <% planes.forEach(function(plan){ -%>
-                  <li><a href="#" data="<%= plan.PlanId %>"><%= plan.PlanNombre %></a></li>
+                  <li><a href="#" dd="plan" data="<%= plan.PlanId %>"><%= plan.PlanNombre %></a></li>
                 <% }) -%>
               </ul>
             </div>
 
+            <input type="hidden" name="ciclo" id="dd-ciclo">
             <div class="btn-group dropdown">
-              <button id="ciclo" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button id="btn-dd-ciclo" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Ciclo <span class="caret"></span>
               </button>
-              <ul class="dropdown-menu" aria-labelledby="ciclo">
+              <ul class="dropdown-menu" aria-labelledby="btn-dd-ciclo" dd="ciclo">
                 <% ciclos.forEach(function(ciclo){ -%>
-                  <li><a href="#" data="<%= ciclo.CicloId %>"><%= ciclo.CicloDesc %></a></li>
+                  <li><a href="#" dd="ciclo" data="<%= ciclo.CicloId %>"><%= ciclo.CicloDesc %></a></li>
                 <% }) -%>
               </ul>
             </div>
 
+            <input type="hidden" name="grado" id="dd-grado">
             <div class="btn-group dropdown">
-              <button id="grado" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button id="btn-dd-grado" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Grado <span class="caret"></span>
               </button>
-              <ul class="dropdown-menu" aria-labelledby="grado">
-                <% grados.forEach(function(grado){ -%>
-                  <li><a href="#" data="<%= grado.GradoId %>"><%= grado.GradoDesc %></a></li>
-                <% }) -%>
+              <ul class="dropdown-menu" aria-labelledby="btn-dd-grado" dd="grado">
+                <!-- <% grados.forEach(function(grado){ -%>
+                  <li><a href="#" dd="grado" data="<%= grado.GradoId %>"><%= grado.GradoDesc %></a></li>
+                <% }) -%> -->
               </ul>
             </div>
 
+            <input type="hidden" name="materia" id="dd-materia">
             <div class="btn-group dropdown">
-              <button id="materia" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button id="btn-dd-materia" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Materia <span class="caret"></span>
               </button>
-              <ul class="dropdown-menu" aria-labelledby="materia">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
+              <ul class="dropdown-menu" aria-labelledby="btn-dd-materia" dd="materia">
               </ul>
             </div>
 
