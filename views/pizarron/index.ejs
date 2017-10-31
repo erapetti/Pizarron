@@ -1,10 +1,12 @@
 
 <script type="text/javascript">
-//var dependencias = JSON.parse('<%- JSON.stringify(dependencias) %>');
-var planes = JSON.parse('<%- JSON.stringify(planes) %>');
-var ciclos = JSON.parse('<%- JSON.stringify(ciclos) %>');
-var grados = JSON.parse('<%- JSON.stringify(grados) %>');
-var stock = JSON.parse('<%- JSON.stringify(stock) %>');
+var departamentos = <%- JSON.stringify(departamentos) %>;
+var asignaturas = <%- JSON.stringify(asignaturas) %>;
+var dependencias = <%- JSON.stringify(dependencias) %>;
+var planes = <%- JSON.stringify(planes) %>;
+var ciclos = <%- JSON.stringify(ciclos) %>;
+var grados = <%- JSON.stringify(grados) %>;
+var stock  = <%- JSON.stringify(stock)  %>;
 </script>
 
 <h1>Búsqueda de grupos</h1>
@@ -22,9 +24,9 @@ var stock = JSON.parse('<%- JSON.stringify(stock) %>');
               Departamento <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="departamento">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
+              <% departamentos.forEach(function(departamento){ -%>
+                <li><a href="#" data="<%= departamento.DeptoId %>"><%= departamento.DeptoNombre %></a></li>
+              <% }) -%>
             </ul>
           </div>
           Asignatura:
@@ -33,9 +35,9 @@ var stock = JSON.parse('<%- JSON.stringify(stock) %>');
               Asignatura <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="asignatura">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
+              <% asignaturas.forEach(function(asignatura){ -%>
+                <li><a href="#" data="<%= asignatura.AsignId %>"><%= asignatura.AsignDesc %></a></li>
+              <% }) -%>
             </ul>
           </div>
         </div>

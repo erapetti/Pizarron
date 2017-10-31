@@ -21,6 +21,8 @@ module.exports = {
           },
           DependDesc: 'string',
           DependNom: 'string',
+          DependTipId: 'integer',
+          DependSubTipId: 'integer',
           StatusId: 'integer',
   },
 
