@@ -26,6 +26,7 @@ module.exports = {
 		var stock = Array();
 		stock[0] = { DependId:1001, PlanId:27, CicloId:2, GradoId:5, OrientacionId:0, OpcionId:36, MateriaNombre:'MATEMÁTICA I', Grupos:'3'};
 		stock[1] = { DependId:1001, PlanId:27, CicloId:2, GradoId:5, OrientacionId:0, OpcionId:36, MateriaNombre:'MATEMÁTICA III', Grupos:'2'};
+		stock[2] = { DependId:1001, PlanId:14, CicloId:1, GradoId:4, OrientacionId:0, OpcionId:0, MateriaNombre:'MATEMÁTICA', Grupos:'1'};
 		var err = undefined;
 
 		return callback(err, stock);
@@ -45,6 +46,10 @@ module.exports = {
 		var departamento = parseInt(req.param("departamento"));
 		var asignatura = parseInt(req.param("asignatura"));
 
+		if (!departamento || !asignatura) {
+				return res.serverError(new Error("Parámetros incorrectos"));
+		}
+
 		Webces.libres(departamento,asignatura,function(err,stock){
 			if (err) {
 				return res.serverError(err);
@@ -58,12 +63,18 @@ module.exports = {
 					if (err) {
 						return res.serverError(err);
 					}
-					Dependencias.find({StatusId:1,DependTipId:2,DependSubTipId:1}).exec(function(err,dependencias){
+					Dependencias.find({StatusId:1,or:[{DependTipId:2,DependSubTipId:1},{DependTipId:6},{DependTipId:7}]}).exec(function(err,dependencias){
 						if (err) {
 							return res.serverError(err);
 						}
+						// tengo problemas con las comillas dobles al pasarlas por JSON.parse
 						dependencias.forEach(function(d){
-							d.DependDesc = d.DependDesc.replace(/"/g, "");
+							if (d.DependDesc) {
+								d.DependDesc = d.DependDesc.replace(/"/g, "");
+							}
+							if (d.DependNom) {
+								d.DependNom = d.DependNom.replace(/"/g, "");
+							}
 						});
 						Planes.find({PlanActivo:1}).exec(function(err,planes){
 							if (err) {

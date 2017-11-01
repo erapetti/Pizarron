@@ -7,6 +7,16 @@ var planes = <%- JSON.stringify(planes) %>;
 var ciclos = <%- JSON.stringify(ciclos) %>;
 var grados = <%- JSON.stringify(grados) %>;
 var stock  = <%- JSON.stringify(stock)  %>;
+
+planes.push({PlanId:"",PlanAbrev:"Todos los planes"});
+ciclos.push({CicloId:"",CicloAbrev:"Todos los ciclos"});
+grados.push({GradoId:"",GradoAbrev:"Todos los grados"});
+
+planes.push({PlanId:"null",PlanAbrev:"N/C"});
+ciclos.push({CicloId:"null",CicloAbrev:"N/C"});
+grados.push({GradoId:"null",GradoAbrev:"N/C"});
+
+
 </script>
 
 <h1>Búsqueda de grupos</h1>
@@ -17,32 +27,34 @@ var stock  = <%- JSON.stringify(stock)  %>;
     <div class="panel panel-default">
       <div class="panel-body">
 
-        <div class="row">
-          Departamento:
-          <input type="hidden" name="departamento" id="dd-departamento" value="<%= departamento %>">
-          <div class="btn-group dropdown">
-            <button id="btn-dd-departamento" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Departamento <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="btn-dd-departamento" dd="departamento">
-              <% departamentos.forEach(function(departamento){ -%>
-                <li><a href="#" dd="departamento" data="<%= departamento.DeptoId %>"><%= departamento.DeptoNombre %></a></li>
-              <% }) -%>
-            </ul>
+        <form action="" method="post" autosubmit="1">
+          <div class="row">
+            Departamento:
+            <input type="hidden" name="departamento" id="dd-departamento" value="<%= departamento %>">
+            <div class="btn-group dropdown">
+              <button id="btn-dd-departamento" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Departamento <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="btn-dd-departamento" dd="departamento">
+                <% departamentos.forEach(function(departamento){ -%>
+                  <li><a href="#" dd="departamento" data="<%= departamento.DeptoId %>"><%= departamento.DeptoNombre %></a></li>
+                <% }) -%>
+              </ul>
+            </div>
+            Asignatura:
+            <input type="hidden" name="asignatura" id="dd-asignatura" value="<%= asignatura %>">
+            <div class="btn-group dropdown">
+              <button id="btn-dd-asignatura" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Asignatura <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="btn-dd-asignatura" dd="asignatura">
+                <% asignaturas.forEach(function(asignatura){ -%>
+                  <li><a href="#" dd="asignatura" data="<%= asignatura.AsignId %>"><%= asignatura.AsignDesc %></a></li>
+                <% }) -%>
+              </ul>
+            </div>
           </div>
-          Asignatura:
-          <input type="hidden" name="asignatura" id="dd-asignatura" value="<%= asignatura %>">
-          <div class="btn-group dropdown">
-            <button id="btn-dd-asignatura" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Asignatura <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="btn-dd-asignatura" dd="asignatura">
-              <% asignaturas.forEach(function(asignatura){ -%>
-                <li><a href="#" dd="asignatura" data="<%= asignatura.AsignId %>"><%= asignatura.AsignDesc %></a></li>
-              <% }) -%>
-            </ul>
-          </div>
-        </div>
+        </form>
 
         <div class="row">
           Filtrar por:
@@ -105,7 +117,7 @@ var stock  = <%- JSON.stringify(stock)  %>;
         <div class="table-responsive">
           <table class="table" id="stock">
             <thead>
-              <tr><th>Liceo</th><th>Plan</th><th>Ciclo</th><th>Grado</th><th>Orientación</th><th>Opción</th><th>Materia</th><th>Grupos</th></tr>
+              <tr><th>Liceo</th><th>Plan</th><th>Ciclo</th><th>Grado</th><th>Orientación</th><th>Opción</th><th>Materia</th><th>Grupos<br/>Teórico</th><th>Grupos<br/>Práctico</th></tr>
             </thead>
             <tbody>
             </tbody>
