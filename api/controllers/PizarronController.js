@@ -35,7 +35,7 @@ module.exports = {
 		var departamento = parseInt(req.param("departamento"));
 		var asignatura = parseInt(req.param("asignatura"));
 
-		this._stock(departamento,asignatura,function(err,stock){
+		Webces.libres(departamento,asignatura,function(err,stock){
 
 			return res.json(err,stock);
 		});
@@ -45,7 +45,7 @@ module.exports = {
 		var departamento = parseInt(req.param("departamento"));
 		var asignatura = parseInt(req.param("asignatura"));
 
-		this._stock(departamento,asignatura,function(err,stock){
+		Webces.libres(departamento,asignatura,function(err,stock){
 			if (err) {
 				return res.serverError(err);
 			}
