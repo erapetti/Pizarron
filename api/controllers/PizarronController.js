@@ -88,7 +88,17 @@ module.exports = {
 									if (err) {
 										return res.serverError(err);
 									}
-									res.view({title:"Pizarrón de Elección de Horas",departamentos:departamentos,asignaturas:asignaturas,dependencias:dependencias,planes:planes,ciclos:ciclos,grados:grados,stock:stock,departamento:departamento,asignatura:asignatura});
+									Orientaciones.find().exec(function(err,orientaciones){
+										if (err) {
+											return res.serverError(err);
+										}
+										Opciones.find().exec(function(err,opciones){
+											if (err) {
+												return res.serverError(err);
+											}
+											res.view({title:"Pizarrón de Elección de Horas",departamentos:departamentos,asignaturas:asignaturas,dependencias:dependencias,planes:planes,ciclos:ciclos,grados:grados,orientaciones:orientaciones,opciones:opciones,stock:stock,departamento:departamento,asignatura:asignatura});
+										});
+									});
 								});
 							});
 						});

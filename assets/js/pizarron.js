@@ -33,16 +33,30 @@ function actualizaDropDown(dd,nombres,clave,attrNombre){
   $("ul.dropdown-menu[dd="+dd+"]").html( html );
 };
 
+function buscar(id,nombres,clave,valor) {
+  var elem = nombres.find(function(e){return e[clave]==id});
+  return (elem ? elem[valor] : "");
+};
+
 function actualizaStock(){
   var html;
   for (var i = 0; i < stock.length; i++) {
-    html += "<tr plan="+stock[i].PlanId+" ciclo="+stock[i].CicloId+" grado="+stock[i].GradoId+">"+
+    html += "<tr plan="+stock[i].PlanId+
+              " ciclo="+stock[i].CicloId+
+              " grado="+stock[i].GradoId+
+              " orientacion="+stock[i].OrientacionId+
+              " opcion="+stock[i].OpcionId+
+              ">"+
                  "<td>"+dependencias.find(function(e){return e.DependId==stock[i].DependId}).DependDesc+
-            "</td><td>"+(stock[i].PlanId != null ? planes.find(function(e){return e.PlanId==stock[i].PlanId}).PlanAbrev : "")+
-            "</td><td>"+(stock[i].CicloId != null ? ciclos.find(function(e){return e.CicloId==stock[i].CicloId}).CicloAbrev : "")+
-            "</td><td>"+(stock[i].GradoId != null ? grados.find(function(e){return e.GradoId==stock[i].GradoId}).GradoAbrev : "")+
-            "</td><td>"+(stock[i].OrientacionId != null ? stock[i].OrientacionId : "")+
-            "</td><td>"+(stock[i].OpcionId != null ? stock[i].OpcionId : "")+
+            "</td><td>"+buscar(stock[i].PlanId, planes,"PlanId","PlanAbrev")+
+            "</td><td>"+buscar(stock[i].CicloId, ciclos,"CicloId","CicloAbrev")+
+            "</td><td>"+(stock[i].GradoId != null ?
+                          buscar(stock[i].GradoId, grados,"GradoId","GradoAbrev")+
+                          (stock[i].OpcionId == null || stock[i].OpcionId == 1 ?
+                            " "+buscar(stock[i].OrientacionId, orientaciones,"OrientacionId","OrientacionAbrev") :
+                            " "+buscar(stock[i].OpcionId, opciones,"OpcionId","OpcionAbrev")
+                          ) :
+                          "")+
             "</td><td>"+(stock[i].MateriaNombre != null ? stock[i].MateriaNombre : "")+
             "</td><td>"+(stock[i].GrTeorico != null ? stock[i].GrTeorico : "")+
             "</td><td>"+(stock[i].GrPractico != null ? stock[i].GrPractico : "")+
@@ -53,6 +67,8 @@ function actualizaStock(){
   actualizaDropDown("plan",planes,"PlanId","PlanAbrev");
   actualizaDropDown("ciclo",ciclos,"CicloId","CicloAbrev");
   actualizaDropDown("grado",grados,"GradoId","GradoAbrev");
+  actualizaDropDown("orientacion",orientaciones,"OrientacionId","OrientacionAbrev");
+  actualizaDropDown("opcion",opciones,"OpcionId","OpcionAbrev");
   //actualizaDropDown("materia",materias,"MateriaId","MateriaNombre");
 };
 $(document).ready(actualizaStock);
