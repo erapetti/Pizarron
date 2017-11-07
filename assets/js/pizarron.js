@@ -1,36 +1,80 @@
-function actualizaDropDown(dd,nombres,clave,attrNombre){
+function actualizaDropDownFilter(dd,nombres,clave,attrNombre){
   // Busco los valores en uso en stock para la columna col
-  var seen = Array();
+  var cant = Array();
   $('#stock > tbody > tr:visible').each(function(){
-    if ($(this).attr(dd)) {
-      var id = $(this).attr(dd);
-      var obj = nombres.find(function(n){return n[clave] == id});
-      if (obj) {
-        seen[$(this).attr(dd)] = obj[attrNombre];
-      }
+    var id = $(this).attr(dd);
+    if (id) {
+      cant[id] = parseInt($(this).attr("grupos"))+(typeof cant[id] === "undefined" ? 0 : cant[id]);
     }
   });
-  /*
-  for (var i = 0; i < stock.length; i++) {
-    if (typeof stock[i][clave] !== 'undefined' && typeof seen[stock[i][clave]] === 'undefined') {
-      var filterout=false;
-      for (var filtro in Array("plan","ciclo","grado")) {
-        var val = $('#dd-'+filtro).val();
-        if (typeof val !== 'undefined' && stock[i][filtro])
-        // incluyo la opción entre los encontrados
-        var item = nombres.find(function(e){return e[clave]==stock[i][clave]});
-        seen[stock[i][clave]] = item[attrNombre];
-      }
-    }
-  }
-  */
   // Armo las opciones del dropdown
   var html = '<li><a href="#" dd="'+dd+'" data="">'+(nombres.find(function(n){return n[clave] == ""}))[attrNombre]+'</a></li><li class="divider"></li>';
-  for (var key in seen) {
-    html += '<li><a href="#" dd="'+dd+'" data="'+key+'">'+seen[key]+'</a></li>';
+  for (var id in cant) {
+    var obj = nombres.find(function(n){return n[clave] == id});
+    if (obj) {
+      html += '<li><a href="#" dd="'+dd+'" data="'+id+'">'+obj[attrNombre]+' ('+cant[id]+')</a></li>';
+    }
   }
   // Actualizo el dropdown
   $("ul.dropdown-menu[dd="+dd+"]").html( html );
+  // función para actualizar los dropdown-menu cuando el usuario selecciona una opción
+  $("ul.dropdown-menu[dd="+dd+"] li a").click(clickDropDownFilter);
+};
+
+function actualizaDropDownsFilter(){
+  //actualizaDropDownFilter("dependencia",dependencias,"DependId","DependDesc");
+  actualizaDropDownFilter("plan",planes,"PlanId","PlanAbrev");
+  actualizaDropDownFilter("ciclo",ciclos,"CicloId","CicloAbrev");
+  actualizaDropDownFilter("grado",grados,"GradoId","GradoAbrev");
+  actualizaDropDownFilter("orientacion",orientaciones,"OrientacionId","OrientacionDesc");
+  actualizaDropDownFilter("opcion",opciones,"OpcionId","OpcionDesc");
+  //actualizaDropDownFilter("materia",materias,"MateriaId","MateriaNombre");
+};
+
+function clickDropDown(event) {
+  event.preventDefault();
+  // actualizo input
+  $('#dd-'+$(this).attr('dd')).val( $(this).attr('data') );
+  // actualizo etiqueta del botón
+  $('#btn-dd-'+$(this).attr('dd')).html( $(this).text() + ' <span class="caret"></span>');
+
+  if ($(this).parents('form[autosubmit=1]').length) {
+    // disaparo change en los inputs
+    $('#dd-'+$(this).attr('dd')).val( $(this).attr('data') ).change();
+  }
+};
+
+// función para actualizar los dropdown-menu de tipo filtro cuando el usuario selecciona una opción
+function clickDropDownFilter(event) {
+  event.preventDefault();
+  // actualizo input
+  $('#dd-'+$(this).attr('dd')).val( $(this).attr('data') );
+  // actualizo etiqueta del botón
+  var nombre = $('#btn-dd-'+$(this).attr('dd')).html().replace(/(: .*)? <span.*/,'');
+  $('#btn-dd-'+$(this).attr('dd')).html( nombre+': '+$(this).text().replace(/ \(.*\)/,'') + ' <span class="caret"></span>');
+
+  // actualizo las líneas del stock que se muestran
+  if ($(this).attr('data') === "") {
+    filtroStock();
+  } else {
+    // aplico el filtro
+    $('#stock > tbody > tr:not(['+$(this).attr('dd')+'='+$(this).attr('data')+'])').filter(':visible').hide();
+  }
+  actualizaDropDownsFilter();
+};
+
+function filtroStock() {
+  // muestro todas las opciones
+  $('#stock > tbody > tr').show();
+  $('input[type=hidden]').each(function(){
+    var id = $(this).attr('id');
+    if (id.match(/^dd-/) && $(this).val() !== "") {
+      if ($(this).parents('form').length == 0) {
+        // es un filtro que tiene valor asignado
+        $('#stock > tbody > tr:not(['+$(this).attr('name')+'='+$(this).val()+'])').hide();
+      }
+    }
+  });
 };
 
 function buscar(id,nombres,clave,valor) {
@@ -39,6 +83,9 @@ function buscar(id,nombres,clave,valor) {
 };
 
 function actualizaStock(){
+  if (typeof stock === 'undefined') {
+    return;
+  }
   var html;
   for (var i = 0; i < stock.length; i++) {
     html += "<tr plan="+stock[i].PlanId+
@@ -46,6 +93,7 @@ function actualizaStock(){
               " grado="+stock[i].GradoId+
               " orientacion="+stock[i].OrientacionId+
               " opcion="+stock[i].OpcionId+
+              " grupos="+(parseInt(stock[i].GrTeorico != null ? stock[i].GrTeorico : 0)+parseInt(stock[i].GrPractico != null ? stock[i].GrPractico : 0))+
               ">"+
                  "<td>"+dependencias.find(function(e){return e.DependId==stock[i].DependId}).DependDesc+
             "</td><td>"+buscar(stock[i].PlanId, planes,"PlanId","PlanAbrev")+
@@ -63,13 +111,7 @@ function actualizaStock(){
             "</td></tr>";
   }
   $('#stock > tbody').html(html);
-  //actualizaDropDown("dependencia",dependencias,"DependId","DependDesc");
-  actualizaDropDown("plan",planes,"PlanId","PlanAbrev");
-  actualizaDropDown("ciclo",ciclos,"CicloId","CicloAbrev");
-  actualizaDropDown("grado",grados,"GradoId","GradoAbrev");
-  actualizaDropDown("orientacion",orientaciones,"OrientacionId","OrientacionAbrev");
-  actualizaDropDown("opcion",opciones,"OpcionId","OpcionAbrev");
-  //actualizaDropDown("materia",materias,"MateriaId","MateriaNombre");
+  actualizaDropDownsFilter();
 };
 $(document).ready(actualizaStock);
 
@@ -79,36 +121,21 @@ $(document).ready(function() {
     $(this).parents('form').get(0).submit();
   });
 
-  // inicialización de los dropdown-menu
-  $("ul.dropdown-menu").each(function(index,obj) {
+  // inicialización de las etiquetas de los dropdown-menu
+  $("ul.dropdown-menu").each(function() {
     var campo = $(this).attr('dd');
     var val = $('#dd-'+campo).val();
     if (typeof val !== 'undefined' && val!=="") {
-      var texto = $("ul.dropdown-menu[dd="+campo+"] li a[data='"+val+"']").text();
-      // actualizo etiqueta del botón
-      $('#btn-dd-'+campo).html( texto + ' <span class="caret"></span>');
-    }
-  });
-
-  // función para actualizar los dropdown-menu cuando el usuario selecciona una opción
-  $("ul.dropdown-menu li a").click(function(event) {
-    event.preventDefault();
-    // actualizo input
-    $('#dd-'+$(this).attr('dd')).val( $(this).attr('data') );
-    // actualizo etiqueta del botón
-    $('#btn-dd-'+$(this).attr('dd')).html( $(this).text() + ' <span class="caret"></span>');
-
-    if ($(this).parents('form[autosubmit=1]').length) {
-      // disaparo change en los inputs
-      $('#dd-'+$(this).attr('dd')).val( $(this).attr('data') ).change();
-    } else {
-      // actualizo las líneas del stock que se muestran
-      if ($(this).attr('data') === "") {
-        $('#stock > tbody > tr').show();
+      if ($(this).parents('form').length>0) {
+        var texto = $("ul.dropdown-menu[dd="+campo+"] li a[data='"+val+"']").text().replace(/ \(.*\)/,'');
+        // actualizo etiqueta del botón
+        $('#btn-dd-'+campo).html( texto + ' <span class="caret"></span>');
       } else {
-        $('#stock > tbody > tr').hide();
-        $('#stock > tbody > tr['+$(this).attr('dd')+'='+$(this).attr('data')+']').show();
+        $('ul.dropdown-menu[dd='+campo+'] li a[dd='+campo+'][data='+val+']').click();
       }
     }
   });
+  // función para actualizar los dropdown-menu cuando el usuario selecciona una opción
+  $('ul.dropdown-menu[dd=departamento] li a').click(clickDropDown);
+  $('ul.dropdown-menu[dd=asignatura] li a').click(clickDropDown);
 });
