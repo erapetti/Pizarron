@@ -22,21 +22,11 @@ module.exports = {
 		});
 	},
 
-	_stock: function(departamento,asignatura,callback) {
-		var stock = Array();
-		stock[0] = { DependId:1001, PlanId:27, CicloId:2, GradoId:5, OrientacionId:0, OpcionId:36, MateriaNombre:'MATEMÁTICA I', Grupos:'3'};
-		stock[1] = { DependId:1001, PlanId:27, CicloId:2, GradoId:5, OrientacionId:0, OpcionId:36, MateriaNombre:'MATEMÁTICA III', Grupos:'2'};
-		stock[2] = { DependId:1001, PlanId:14, CicloId:1, GradoId:4, OrientacionId:0, OpcionId:0, MateriaNombre:'MATEMÁTICA', Grupos:'1'};
-		var err = undefined;
-
-		return callback(err, stock);
-	},
-
 	stock: function(req,res) {
 		var departamento = parseInt(req.param("departamento"));
 		var asignatura = parseInt(req.param("asignatura"));
 
-		Webces.libres(departamento,asignatura,function(err,stock){
+		Stock.libres(departamento,asignatura,function(err,stock){
 
 			return res.json(err,stock);
 		});
@@ -50,7 +40,7 @@ module.exports = {
 				return res.serverError(new Error("Parámetros incorrectos"));
 		}
 
-		Webces.libres(departamento,asignatura,function(err,stock){
+		Stock.libres(departamento,asignatura,function(err,stock){
 			if (err) {
 				return res.serverError(err);
 			}
@@ -84,19 +74,29 @@ module.exports = {
 								if (err) {
 									return res.serverError(err);
 								}
-								Grados.find().exec(function(err,grados){
+								Turnos.find().exec(function(err,turnos){
 									if (err) {
 										return res.serverError(err);
 									}
-									Orientaciones.find().exec(function(err,orientaciones){
+									Grados.find().exec(function(err,grados){
 										if (err) {
 											return res.serverError(err);
 										}
-										Opciones.find().exec(function(err,opciones){
+										Orientaciones.find().exec(function(err,orientaciones){
 											if (err) {
 												return res.serverError(err);
 											}
-											res.view({title:"Pizarrón de Elección de Horas",departamentos:departamentos,asignaturas:asignaturas,dependencias:dependencias,planes:planes,ciclos:ciclos,grados:grados,orientaciones:orientaciones,opciones:opciones,stock:stock,departamento:departamento,asignatura:asignatura});
+											Opciones.find().exec(function(err,opciones){
+												if (err) {
+													return res.serverError(err);
+												}
+												Materias.webces(function(err,materias){
+													if (err) {
+														return res.serverError(err);
+													}
+													res.view({title:"Pizarrón de Elección de Horas",departamentos:departamentos,asignaturas:asignaturas,dependencias:dependencias,planes:planes,ciclos:ciclos,turnos:turnos,grados:grados,orientaciones:orientaciones,opciones:opciones,materias:materias,stock:stock,departamento:departamento,asignatura:asignatura});
+												});
+											});
 										});
 									});
 								});

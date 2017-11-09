@@ -19,10 +19,11 @@ module.exports = {
       select DependId,
              TradPlanId PlanId,
              TradCicloId CicloId,
+             TurnoId,
              TradGradoId GradoId,
              TradOrientacId OrientacionId,
              TradOpcionId OpcionId,
-             TradMateriaId MateriaId,
+             AsignId MateriaId,
              sum(if(elcCodMovElecId=1,PizGrp1erCiclo+PizGrp2doTeor,0)-if(elcCodMovElecId>1 and p.fnccedula>0,PizGrp1erCiclo+PizGrp2doTeor,0)) GrTeorico,
              sum(if(elcCodMovElecId=1,PizGrp2doPractico,0)-if(elcCodMovElecId>1 and p.fnccedula>0,PizGrp2doPractico,0)) GrPractico
       from webces.ELCPIZARRON p
@@ -32,7 +33,7 @@ module.exports = {
        and GrupIntId<>90
        and PizDeptoId=?
        and GrupIntId=?
-      group by 1,2,3,4,5,6,7
+      group by 1,2,3,4,5,6,7,8
       having GrTeorico+GrPractico>0
     `,
     [DeptoId,AsignId],

@@ -5,126 +5,144 @@ var asignaturas = <%- JSON.stringify(asignaturas) %>;
 var dependencias = <%- JSON.stringify(dependencias) %>;
 var planes = <%- JSON.stringify(planes) %>;
 var ciclos = <%- JSON.stringify(ciclos) %>;
+var turnos = <%- JSON.stringify(turnos) %>;
 var grados = <%- JSON.stringify(grados) %>;
 var orientaciones = <%- JSON.stringify(orientaciones) %>;
 var opciones = <%- JSON.stringify(opciones) %>;
+var materias = <%- JSON.stringify(materias) %>;
 var stock  = <%- JSON.stringify(stock)  %>;
 
 planes.push({PlanId:"",PlanAbrev:"Todos"});
 ciclos.push({CicloId:"",CicloAbrev:"Todos"});
+turnos.push({TurnoId:"",TurnoDesc:"Todos"});
 grados.push({GradoId:"",GradoAbrev:"Todos"});
 orientaciones.push({OrientacionId:"",OrientacionDesc:"Todas"});
 opciones.push({OpcionId:"",OpcionDesc:"Todas"});
+materias.push({MateriaId:"",MateriaNombre:"Todas"});
 
 planes.push({PlanId:"null",PlanAbrev:"N/C"});
 ciclos.push({CicloId:"null",CicloAbrev:"N/C"});
+turnos.push({TurnoId:"null",TurnoDesc:"N/C"});
 grados.push({GradoId:"null",GradoAbrev:"N/C"});
 orientaciones.push({OrientacionId:"null",OrientacionDesc:"N/C"});
 opciones.push({OpcionId:"null",OpcionDesc:"N/C"});
-
-
+materias.push({MateriaId:"null",MateriaNombre:"N/C"});
 </script>
 
-<h1>Búsqueda de grupos</h1>
+
+<div class="panel panel-default">
+  <div class="panel-body" id="buscador">
+    <h1>Búsqueda de grupos</h1>
+
+    <form action="" method="post" autosubmit="1">
+      <div class="row">
+        <div class="col-sm-4">
+          Departamento:
+          <input type="hidden" name="departamento" id="dd-departamento" value="<%= departamento %>">
+          <div class="btn-group dropdown">
+            <button id="btn-dd-departamento" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Departamento <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="btn-dd-departamento" dd="departamento">
+              <% departamentos.forEach(function(departamento){ -%>
+                <li><a href="#" dd="departamento" data="<%= departamento.DeptoId %>"><%= departamento.DeptoNombre %></a></li>
+              <% }) -%>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-8">
+          Asignatura:
+          <input type="hidden" name="asignatura" id="dd-asignatura" value="<%= asignatura %>">
+          <div class="btn-group dropdown">
+            <button id="btn-dd-asignatura" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Asignatura <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="btn-dd-asignatura" dd="asignatura">
+              <% asignaturas.forEach(function(asignatura){ -%>
+                <li><a href="#" dd="asignatura" data="<%= asignatura.AsignId %>"><%= asignatura.AsignDesc %></a></li>
+              <% }) -%>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="row" id="filtros">
+      <div class="col-sm-12">
+        Filtrar por:
+        <div class="btn-group" role="group" aria-label="filtros">
+
+          <input type="hidden" name="plan" id="dd-plan">
+          <div class="btn-group dropdown">
+            <button id="btn-dd-plan" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Plan <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="btn-id-plan" dd="plan">
+            </ul>
+          </div>
+
+          <input type="hidden" name="ciclo" id="dd-ciclo">
+          <div class="btn-group dropdown">
+            <button id="btn-dd-ciclo" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Ciclo <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="btn-dd-ciclo" dd="ciclo">
+            </ul>
+          </div>
+
+          <input type="hidden" name="grado" id="dd-grado">
+          <div class="btn-group dropdown">
+            <button id="btn-dd-grado" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Grado <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="btn-dd-grado" dd="grado">
+            </ul>
+          </div>
+
+          <input type="hidden" name="turno" id="dd-turno">
+          <div class="btn-group dropdown">
+            <button id="btn-dd-turno" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Turno <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="btn-dd-turno" dd="turno">
+            </ul>
+          </div>
+
+          <input type="hidden" name="orientacion" id="dd-orientacion">
+          <div class="btn-group dropdown">
+            <button id="btn-dd-orientacion" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Orientación <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="btn-dd-orientacion" dd="orientacion">
+            </ul>
+          </div>
+
+          <input type="hidden" name="opcion" id="dd-opcion">
+          <div class="btn-group dropdown">
+            <button id="btn-dd-opcion" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Opción <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="btn-dd-opcion" dd="opcion">
+            </ul>
+          </div>
+
+          <input type="hidden" name="materia" id="dd-materia">
+          <div class="btn-group dropdown">
+            <button id="btn-dd-materia" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Materia <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="btn-dd-materia" dd="materia">
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="panel panel-default">
   <div class="panel-body">
-
-    <div class="panel panel-default">
-      <div class="panel-body">
-
-        <form action="" method="post" autosubmit="1">
-          <div class="row">
-            Departamento:
-            <input type="hidden" name="departamento" id="dd-departamento" value="<%= departamento %>">
-            <div class="btn-group dropdown">
-              <button id="btn-dd-departamento" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Departamento <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="btn-dd-departamento" dd="departamento">
-                <% departamentos.forEach(function(departamento){ -%>
-                  <li><a href="#" dd="departamento" data="<%= departamento.DeptoId %>"><%= departamento.DeptoNombre %></a></li>
-                <% }) -%>
-              </ul>
-            </div>
-            Asignatura:
-            <input type="hidden" name="asignatura" id="dd-asignatura" value="<%= asignatura %>">
-            <div class="btn-group dropdown">
-              <button id="btn-dd-asignatura" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Asignatura <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="btn-dd-asignatura" dd="asignatura">
-                <% asignaturas.forEach(function(asignatura){ -%>
-                  <li><a href="#" dd="asignatura" data="<%= asignatura.AsignId %>"><%= asignatura.AsignDesc %></a></li>
-                <% }) -%>
-              </ul>
-            </div>
-          </div>
-        </form>
-
-        <div class="row">
-          Filtrar por:
-          <div class="btn-group" role="group" aria-label="filtros">
-
-            <input type="hidden" name="plan" id="dd-plan">
-            <div class="btn-group dropdown">
-              <button id="btn-dd-plan" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Plan <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="btn-id-plan" dd="plan">
-              </ul>
-            </div>
-
-            <input type="hidden" name="ciclo" id="dd-ciclo">
-            <div class="btn-group dropdown">
-              <button id="btn-dd-ciclo" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Ciclo <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="btn-dd-ciclo" dd="ciclo">
-              </ul>
-            </div>
-
-            <input type="hidden" name="grado" id="dd-grado">
-            <div class="btn-group dropdown">
-              <button id="btn-dd-grado" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Grado <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="btn-dd-grado" dd="grado">
-              </ul>
-            </div>
-
-            <input type="hidden" name="orientacion" id="dd-orientacion">
-            <div class="btn-group dropdown">
-              <button id="btn-dd-orientacion" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Orientación <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="btn-dd-orientacion" dd="orientacion">
-              </ul>
-            </div>
-
-            <input type="hidden" name="opcion" id="dd-opcion">
-            <div class="btn-group dropdown">
-              <button id="btn-dd-opcion" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Opción <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="btn-dd-opcion" dd="opcion">
-              </ul>
-            </div>
-
-            <input type="hidden" name="materia" id="dd-materia">
-            <div class="btn-group dropdown">
-              <button id="btn-dd-materia" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Materia <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="btn-dd-materia" dd="materia">
-              </ul>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
 
     <h2>Grupos encontrados:</h2>
     <div class="panel panel-default">
@@ -132,7 +150,7 @@ opciones.push({OpcionId:"null",OpcionDesc:"N/C"});
         <div class="table-responsive">
           <table class="table" id="stock">
             <thead>
-              <tr><th>Liceo</th><th>Plan</th><th>Ciclo</th><th>Grupo</th><th>Materia</th><th>Grupos<br/>Teórico</th><th>Grupos<br/>Práctico</th></tr>
+              <tr><th>Liceo</th><th>Plan</th><th>Ciclo</th><th>Turno</th><th>Grupo</th><th>Materia</th><th>Grupos<br/>Teórico</th><th>Grupos<br/>Práctico</th></tr>
             </thead>
             <tbody>
             </tbody>

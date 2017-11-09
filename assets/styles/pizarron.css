@@ -1,2 +1,36 @@
 div.dropdown {padding-top:4px;padding-bottom:4px;}
 div.nombre {padding:12px;font-weight:bold;}
+div#filtros.affix {position:fixed;top:0;background-color:#4484ce;color:#d9d9d9;width:100%;}
+div#buscador {width:100%;margin:0;padding:0;background-color:#4484ce;color:#d9d9d9;}
+div#buscador .btn-default, div#buscador .btn-default:focus {background-color:#4484ce;color:#d9d9d9;border-color:#d9d9d9;}
+div#buscador div.open .btn-default {color:#f9cf00;border-color:#f9cf00;}
+div#buscador .row, div#buscador h1 {margin:0;padding:14px;}
+div#buscador h1 {font-family:Montserrat;}
+
+table#stock tr.cambio td {border-top:3px solid #f19f4d;}
+
+.light {color:#f9cf00 !important;border-color:#f9cf00 !important}
+.tangerine {color:#f19f4d  !important;border-color:#f19f4d !important;}
+.aluminium {background-color:#d9d9d9;}
+.cerulean {background-color:#4484ce;}
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto'),
+         local('Roboto-Regular'),
+         url('fonts/roboto.woff2') format('woff2'),
+         url('fonts/roboto.woff') format('woff'),
+         url('fonts/roboto.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Montserrat';
+  src: local('Montserrat'),
+         local('Montserrat-Regular'),
+         url('fonts/Montserrat-Regular.woff2') format('woff2'),
+         url('fonts/Montserrat-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+body {font-family:Roboto}

@@ -25,10 +25,11 @@ function actualizaDropDownsFilter(){
   //actualizaDropDownFilter("dependencia",dependencias,"DependId","DependDesc");
   actualizaDropDownFilter("plan",planes,"PlanId","PlanAbrev");
   actualizaDropDownFilter("ciclo",ciclos,"CicloId","CicloAbrev");
+  actualizaDropDownFilter("turno",turnos,"TurnoId","TurnoDesc");
   actualizaDropDownFilter("grado",grados,"GradoId","GradoAbrev");
   actualizaDropDownFilter("orientacion",orientaciones,"OrientacionId","OrientacionDesc");
   actualizaDropDownFilter("opcion",opciones,"OpcionId","OpcionDesc");
-  //actualizaDropDownFilter("materia",materias,"MateriaId","MateriaNombre");
+  actualizaDropDownFilter("materia",materias,"MateriaId","MateriaNombre");
 };
 
 function clickDropDown(event) {
@@ -47,18 +48,26 @@ function clickDropDown(event) {
 // función para actualizar los dropdown-menu de tipo filtro cuando el usuario selecciona una opción
 function clickDropDownFilter(event) {
   event.preventDefault();
+  var elem = $(this);
   // actualizo input
-  $('#dd-'+$(this).attr('dd')).val( $(this).attr('data') );
+  $('#dd-'+elem.attr('dd')).val( elem.attr('data') );
   // actualizo etiqueta del botón
-  var nombre = $('#btn-dd-'+$(this).attr('dd')).html().replace(/(: .*)? <span.*/,'');
-  $('#btn-dd-'+$(this).attr('dd')).html( nombre+': '+$(this).text().replace(/ \(.*\)/,'') + ' <span class="caret"></span>');
+  var nombre = $('#btn-dd-'+elem.attr('dd')).html().replace(/(: .*)? <span.*/,'');
+  var valor = "";
+  if (elem.attr('data') != "") {
+    valor = ': '+elem.text().replace(/ \(.*\)/,'');
+    $('#btn-dd-'+elem.attr('dd')).addClass("light");
+  } else {
+    $('#btn-dd-'+elem.attr('dd')).removeClass("light");
+  }
+  $('#btn-dd-'+elem.attr('dd')).html( nombre+ valor+ ' <span class="caret"></span>');
 
   // actualizo las líneas del stock que se muestran
-  if ($(this).attr('data') === "") {
+  if (elem.attr('data') === "") {
     filtroStock();
   } else {
     // aplico el filtro
-    $('#stock > tbody > tr:not(['+$(this).attr('dd')+'='+$(this).attr('data')+'])').filter(':visible').hide();
+    $('#stock > tbody > tr:not(['+elem.attr('dd')+'='+elem.attr('data')+'])').filter(':visible').hide();
   }
   actualizaDropDownsFilter();
 };
@@ -66,6 +75,7 @@ function clickDropDownFilter(event) {
 function filtroStock() {
   // muestro todas las opciones
   $('#stock > tbody > tr').show();
+  // recorro los filtros
   $('input[type=hidden]').each(function(){
     var id = $(this).attr('id');
     if (id.match(/^dd-/) && $(this).val() !== "") {
@@ -77,27 +87,33 @@ function filtroStock() {
   });
 };
 
-function buscar(id,nombres,clave,valor) {
+function buscar(id,nombres,clave,valor,deft) {
   var elem = nombres.find(function(e){return e[clave]==id});
-  return (elem ? elem[valor] : "");
+  return (elem && elem[valor] != null ? elem[valor] : (deft ? deft : ""));
 };
 
 function actualizaStock(){
   if (typeof stock === 'undefined') {
     return;
   }
+  var lastDependId = stock[0].DependId;
   var html;
   for (var i = 0; i < stock.length; i++) {
+    var dependdesc = buscar(stock[i].DependId, dependencias,"DependId","DependDesc");
     html += "<tr plan="+stock[i].PlanId+
               " ciclo="+stock[i].CicloId+
+              " turno="+stock[i].TurnoId+
               " grado="+stock[i].GradoId+
               " orientacion="+stock[i].OrientacionId+
               " opcion="+stock[i].OpcionId+
+              " materia="+stock[i].MateriaId+
               " grupos="+(parseInt(stock[i].GrTeorico != null ? stock[i].GrTeorico : 0)+parseInt(stock[i].GrPractico != null ? stock[i].GrPractico : 0))+
+              (lastDependId != stock[i].DependId ? " class='cambio'" : "") +
               ">"+
-                 "<td>"+dependencias.find(function(e){return e.DependId==stock[i].DependId}).DependDesc+
+                 "<td>"+dependdesc+
             "</td><td>"+buscar(stock[i].PlanId, planes,"PlanId","PlanAbrev")+
             "</td><td>"+buscar(stock[i].CicloId, ciclos,"CicloId","CicloAbrev")+
+            "</td><td>"+buscar(stock[i].TurnoId, turnos,"TurnoId","TurnoDesc")+
             "</td><td>"+(stock[i].GradoId != null ?
                           buscar(stock[i].GradoId, grados,"GradoId","GradoAbrev")+
                           (stock[i].OpcionId == null || stock[i].OpcionId == 1 ?
@@ -105,10 +121,11 @@ function actualizaStock(){
                             " "+buscar(stock[i].OpcionId, opciones,"OpcionId","OpcionAbrev")
                           ) :
                           "")+
-            "</td><td>"+(stock[i].MateriaNombre != null ? stock[i].MateriaNombre : "")+
+            "</td><td>"+buscar(stock[i].MateriaId, materias,"MateriaId","MateriaNombre")+
             "</td><td>"+(stock[i].GrTeorico != null ? stock[i].GrTeorico : "")+
             "</td><td>"+(stock[i].GrPractico != null ? stock[i].GrPractico : "")+
             "</td></tr>";
+    lastDependId = stock[i].DependId;
   }
   $('#stock > tbody').html(html);
   actualizaDropDownsFilter();
@@ -126,16 +143,26 @@ $(document).ready(function() {
     var campo = $(this).attr('dd');
     var val = $('#dd-'+campo).val();
     if (typeof val !== 'undefined' && val!=="") {
-      if ($(this).parents('form').length>0) {
-        var texto = $("ul.dropdown-menu[dd="+campo+"] li a[data='"+val+"']").text().replace(/ \(.*\)/,'');
+//      if ($(this).parents('form').length>0) {
+//        var texto = $("ul.dropdown-menu[dd="+campo+"] li a[data='"+val+"']").text().replace(/ \(.*\)/,'');
         // actualizo etiqueta del botón
-        $('#btn-dd-'+campo).html( texto + ' <span class="caret"></span>');
-      } else {
+//        $('#btn-dd-'+campo).html( texto + ' <span class="caret"></span>');
+//      } else {
         $('ul.dropdown-menu[dd='+campo+'] li a[dd='+campo+'][data='+val+']').click();
-      }
+//      }
     }
   });
   // función para actualizar los dropdown-menu cuando el usuario selecciona una opción
   $('ul.dropdown-menu[dd=departamento] li a').click(clickDropDown);
   $('ul.dropdown-menu[dd=asignatura] li a').click(clickDropDown);
+});
+
+$(document).ready(function(){
+  $(window).scroll(function(){
+    if (! $('#buscador').visible(true)) {
+      $('#filtros').addClass('affix');
+    } else {
+      $('#filtros').removeClass('affix');
+    }
+  })
 });
