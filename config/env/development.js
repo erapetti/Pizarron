@@ -22,4 +22,7 @@ module.exports = {
   // }
 
   hookTimeout: 40000,
+
+  memcached: [ '127.0.0.1:11211' ],
+
 };

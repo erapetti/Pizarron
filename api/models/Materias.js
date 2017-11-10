@@ -22,7 +22,7 @@ module.exports = {
 		MateriaAbrev: 'string',
 	},
 
-	webces: function(callback) {
+	webces: function(objParam,callback) {
 		return this.query(`
 			select AsignId MateriaId,AsignDesc MateriaNombre,AsignAbreviat MateriaAbrev
 			from webces.ELCASIGNATURAS

@@ -22,7 +22,7 @@ module.exports = {
 		TipoEscalafon: 'string',
 	},
 
-	webces: function(callback) {
+	webces: function(objParam,callback) {
 		return this.query(`
 			select GrupintId AsignId,GrupintDesc AsignDesc, 'H' TipoEscalafon
 			from webces.ELCGRUPOSINTERES join webces.ELCPIZARRON using (GrupintId)

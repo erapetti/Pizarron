@@ -34,6 +34,9 @@ module.exports = {
   log: {
 //    level: "silent"
     level: "info"
-  }
+  },
+
+  memcached: [ 'smemcache01.ces.edu.uy:11211' ],
+
 
 };

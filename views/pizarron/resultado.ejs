@@ -12,6 +12,7 @@ var opciones = <%- JSON.stringify(opciones) %>;
 var materias = <%- JSON.stringify(materias) %>;
 var stock  = <%- JSON.stringify(stock)  %>;
 
+dependencias.push({DependId:"",DependDesc:"Todos"});
 planes.push({PlanId:"",PlanAbrev:"Todos"});
 ciclos.push({CicloId:"",CicloAbrev:"Todos"});
 turnos.push({TurnoId:"",TurnoDesc:"Todos"});
@@ -20,6 +21,7 @@ orientaciones.push({OrientacionId:"",OrientacionDesc:"Todas"});
 opciones.push({OpcionId:"",OpcionDesc:"Todas"});
 materias.push({MateriaId:"",MateriaNombre:"Todas"});
 
+dependencias.push({DependId:"null",DependDesc:"N/C"});
 planes.push({PlanId:"null",PlanAbrev:"N/C"});
 ciclos.push({CicloId:"null",CicloAbrev:"N/C"});
 turnos.push({TurnoId:"null",TurnoDesc:"N/C"});
@@ -29,6 +31,7 @@ opciones.push({OpcionId:"null",OpcionDesc:"N/C"});
 materias.push({MateriaId:"null",MateriaNombre:"N/C"});
 </script>
 
+<h1 id='titulo'>Consejo de Educación Secundaria - Elección de horas</h1>
 
 <div class="panel panel-default">
   <div class="panel-body" id="buscador">
@@ -71,6 +74,15 @@ materias.push({MateriaId:"null",MateriaNombre:"N/C"});
       <div class="col-sm-12">
         Filtrar por:
         <div class="btn-group" role="group" aria-label="filtros">
+
+          <input type="hidden" name="dependencia" id="dd-dependencia">
+          <div class="btn-group dropdown">
+            <button id="btn-dd-dependencia" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dependencia <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="btn-id-dependencia" dd="dependencia">
+            </ul>
+          </div>
 
           <input type="hidden" name="plan" id="dd-plan">
           <div class="btn-group dropdown">
@@ -141,9 +153,10 @@ materias.push({MateriaId:"null",MateriaNombre:"N/C"});
   </div>
 </div>
 
-<div class="panel panel-default">
+<div class="panel panel-default" id="resultado">
   <div class="panel-body">
 
+    <% if (stock.length > 0) { %>
     <h2>Grupos encontrados:</h2>
     <div class="panel panel-default">
       <div class="panel-body">
@@ -158,6 +171,9 @@ materias.push({MateriaId:"null",MateriaNombre:"N/C"});
         </div>
       </div>
     </div>
+    <% } else { %>
+    <h2>No hay grupos disponibles</h2>
+    <% } %>
 
   </div>
 </div>

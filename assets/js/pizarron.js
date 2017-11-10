@@ -22,7 +22,7 @@ function actualizaDropDownFilter(dd,nombres,clave,attrNombre){
 };
 
 function actualizaDropDownsFilter(){
-  //actualizaDropDownFilter("dependencia",dependencias,"DependId","DependDesc");
+  actualizaDropDownFilter("dependencia",dependencias,"DependId","DependDesc");
   actualizaDropDownFilter("plan",planes,"PlanId","PlanAbrev");
   actualizaDropDownFilter("ciclo",ciclos,"CicloId","CicloAbrev");
   actualizaDropDownFilter("turno",turnos,"TurnoId","TurnoDesc");
@@ -100,7 +100,8 @@ function actualizaStock(){
   var html;
   for (var i = 0; i < stock.length; i++) {
     var dependdesc = buscar(stock[i].DependId, dependencias,"DependId","DependDesc");
-    html += "<tr plan="+stock[i].PlanId+
+    html += "<tr dependencia="+stock[i].DependId+
+              " plan="+stock[i].PlanId+
               " ciclo="+stock[i].CicloId+
               " turno="+stock[i].TurnoId+
               " grado="+stock[i].GradoId+
@@ -143,13 +144,13 @@ $(document).ready(function() {
     var campo = $(this).attr('dd');
     var val = $('#dd-'+campo).val();
     if (typeof val !== 'undefined' && val!=="") {
-//      if ($(this).parents('form').length>0) {
-//        var texto = $("ul.dropdown-menu[dd="+campo+"] li a[data='"+val+"']").text().replace(/ \(.*\)/,'');
+      if ($(this).parents('form').length>0) {
+        var texto = $("ul.dropdown-menu[dd="+campo+"] li a[data='"+val+"']").text().replace(/ \(.*\)/,'');
         // actualizo etiqueta del botón
-//        $('#btn-dd-'+campo).html( texto + ' <span class="caret"></span>');
-//      } else {
+        $('#btn-dd-'+campo).html( texto + ' <span class="caret"></span>');
+      } else {
         $('ul.dropdown-menu[dd='+campo+'] li a[dd='+campo+'][data='+val+']').click();
-//      }
+      }
     }
   });
   // función para actualizar los dropdown-menu cuando el usuario selecciona una opción

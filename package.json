@@ -24,6 +24,7 @@
     "jquery": "^3.2.1",
     "jquery-visible": "^1.2.0",
     "l": "^0.6.0",
+    "memcached": "^2.2.2",
     "pstpn-webfont-montserrat": "0.0.5",
     "rc": "1.0.1",
     "roboto-npm-webfont": "^1.0.1",
