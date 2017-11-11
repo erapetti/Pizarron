@@ -109,7 +109,7 @@ function actualizaStock(){
               " opcion="+stock[i].OpcionId+
               " materia="+stock[i].MateriaId+
               " grupos="+(parseInt(stock[i].GrTeorico != null ? stock[i].GrTeorico : 0)+parseInt(stock[i].GrPractico != null ? stock[i].GrPractico : 0))+
-              (lastDependId != stock[i].DependId ? " class='cambio-top'" : (i+1<stock.length && lastDependId != stock[i+1].DependId ? " class='cambio-bottom'" : "")) +
+              (lastDependId != stock[i].DependId ? " class='cambio'" : "") +
               ">"+
                  "<td>"+dependdesc+
             "</td><td>"+buscar(stock[i].PlanId, planes,"PlanId","PlanAbrev")+
@@ -162,8 +162,10 @@ $(document).ready(function(){
   $(window).scroll(function(){
     if (! $('#buscador').visible(true)) {
       $('#filtros').addClass('affix');
+      $('#stock thead').addClass('affix');
     } else {
       $('#filtros').removeClass('affix');
+      $('#stock thead').removeClass('affix');
     }
   })
 });
