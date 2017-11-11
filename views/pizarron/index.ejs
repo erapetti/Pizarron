@@ -10,7 +10,7 @@ var asignaturas = <%- JSON.stringify(asignaturas) %>;
   <a id="credits" class="hidden-xs hidden-sm" href="https://unsplash.com/@pichler_sebastian?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Fotografía de Sebastian Pichler"><span class="glyphicon glyphicon-camera" aria-hidden="true"></span><span style="display:inline-block;padding:2px 3px;">Sebastian Pichler</span></a>
   <h1 id='titulo' class="hidden-xs">Elección de horas</h1>
 
-  <form action="pizarron/resultado" method="post">
+  <form action="resultado" method="post" autosubmit="1">
 
       <div class="panel panel-default" id="panel-buscador">
         <div class="panel-body" id="buscador">
@@ -59,11 +59,7 @@ var asignaturas = <%- JSON.stringify(asignaturas) %>;
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-sm-8">
-                  <input type="submit" value="Buscar" id="buscar">
-                </div>
-              </div>
+
             </div>
           </div>
 

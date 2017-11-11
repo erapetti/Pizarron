@@ -1,5 +1,5 @@
-body {background-color:#000;overflow-y:scroll}
-div#background {position:fixed;top:0;left:0;min-width:100%;min-height:100%;z-index:-10;overflow:hidden;}
+body {background-color:#000;overflow-y0:scroll}
+div#background {position:fixed;top:0;left:0;min-width:100%;min-height:100%;z-index:-10;overflow0:hidden;}
 
 h1, h2 {font-family:Montserrat;text-align:center;}
 
@@ -7,6 +7,7 @@ h1#titulo {width:100%;min-width:1200px;background-color:#f19f4d;color:#4484ce;ma
 a#credits {background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px;}
 a#credits {position:fixed;top:100%;left:0;margin-top:-27px;opacity:0.2;}
 
+input[disabled] { filter:brightness(80%);}
 div.separator {border-left:1px solid #d9d9d9;width:1px;height:200px;margin:auto;}
 div.dropdown {padding-top:4px;padding-bottom:4px;opacity:1;}
 div.nombre {padding:12px;font-weight:bold;}
@@ -19,7 +20,6 @@ div#buscador {width:100%;margin:0 auto;padding:0;background-color:rgba(68,132,20
 div#buscador .btn-default, div#buscador .btn-default:focus {background-color:#4484ce;color:#d9d9d9;border-color:#d9d9d9;}
 div#buscador div.open .btn-default {color:#f9cf00;border-color:#f9cf00;}
 div#buscador .row, div#buscador h1 {margin:0;padding:14px;}
-div#buscador input#buscar {background-color:#4484ce;color:#d9d9d9;border-radius:4px;border:1px solid #d9d9d9;padding:6px 12px;}
 div#resultado table#stock tr.cambio-top td, div#resultado table#stock tr.first-child td  {border-top:1px solid #f19f4d;padding-top:18px;}
 div#resultado table#stock tr.cambio-bottom td {padding-bottom:18px;}
 div#resultado table#stock tr.last-child td {border-bottom:1px solid #f19f4d;}

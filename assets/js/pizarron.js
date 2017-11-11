@@ -154,47 +154,50 @@ function actualizaStock() {
 };
 $(document).ready(actualizaStock);
 
-$(document).ready(function() {
-  // formularios con autosubmit
-  $("form[autosubmit=1] input").change(function(event) {
+  // submit de formularios con autosubmit
+$("form[autosubmit=1] input").change(function(event) {
+  if ( !!$('#dd-departamento').val() && !!$('#dd-asignatura').val() ) {
     $(this).parents('form').get(0).submit();
-  });
+  }
+});
 
-  // inicialización de las etiquetas de los dropdown-menu
-  $("ul.dropdown-menu").each(function() {
-    var campo = $(this).attr('dd');
-    var val = $('#dd-'+campo).val();
-    if (typeof val !== 'undefined' && val!=="") {
-      if ($(this).parents('form').length>0) {
-        var texto = $("ul.dropdown-menu[dd="+campo+"] li a[data='"+val+"']").text().replace(/ \(.*\)/,'');
-        // actualizo etiqueta del botón
-        $('#btn-dd-'+campo).html( texto + ' <span class="caret"></span>');
+// inicialización de las etiquetas de los dropdown-menu
+$("ul.dropdown-menu").each(function() {
+  var campo = $(this).attr('dd');
+  var val = $('#dd-'+campo).val();
+  if (typeof val !== 'undefined' && val!=="") {
+    if ($(this).parents('form').length>0) {
+      var texto = $("ul.dropdown-menu[dd="+campo+"] li a[data='"+val+"']").text().replace(/ \(.*\)/,'');
+      // actualizo etiqueta del botón
+      $('#btn-dd-'+campo).html( texto + ' <span class="caret"></span>');
+    } else {
+      $('ul.dropdown-menu[dd='+campo+'] li a[dd='+campo+'][data='+val+']').click();
+    }
+  }
+});
+
+// función para actualizar los dropdown-menu cuando el usuario selecciona una opción
+$('ul.dropdown-menu[dd=departamento] li a').click(clickDropDown);
+$('ul.dropdown-menu[dd=asignatura] li a').click(clickDropDown);
+
+// programo el cambio de posición de los filtros y el encabezado de la tabla
+if ($('#contenido-resultado').length) {
+  $(window).scroll(function(){
+    if (!$('.dropdown.open').length) {
+      // no tengo un menú abierto
+      if (! $('#scroll-breakpoint').visible(true)) {
+        $('#filtros').addClass('affix');
+        $('#stock thead').addClass('affix');
+        $('#stock thead').css({'top': $('#filtros').height()+15+"px"});
       } else {
-        $('ul.dropdown-menu[dd='+campo+'] li a[dd='+campo+'][data='+val+']').click();
+        $('#filtros').removeClass('affix');
+        $('#stock thead').removeClass('affix');
       }
     }
   });
-  // función para actualizar los dropdown-menu cuando el usuario selecciona una opción
-  $('ul.dropdown-menu[dd=departamento] li a').click(clickDropDown);
-  $('ul.dropdown-menu[dd=asignatura] li a').click(clickDropDown);
-});
-
-$(document).ready(function(){
-  $(window).scroll(function(){
-    if (! $('#scroll-breakpoint').visible(true)) {
-      $('#filtros').addClass('affix');
-      $('#stock thead').addClass('affix');
-      $('#stock thead').css({'top': $('#filtros').height()+15+"px"});
-    } else {
-      $('#filtros').removeClass('affix');
-      $('#stock thead').removeClass('affix');
-    }
-  })
-});
+}
 
 // saco los créditos de la foto
-$(document).ready(function(){
-  window.setTimeout(function(){
-    $('a#credits').fadeOut();
-  },10000);
-});
+window.setTimeout(function(){
+  $('a#credits').fadeOut();
+},10000);
