@@ -114,6 +114,7 @@ function actualizaStock() {
   var html;
   for (var i = 0; i < stock.length; i++) {
     var dependdesc = buscar(stock[i].DependId, dependencias,"DependId","DependDesc");
+    var dependNom = buscar(stock[i].DependId, dependencias,"DependId","DependNom",undefined);
     html += "<tr dependencia="+stock[i].DependId+
               " plan="+stock[i].PlanId+
               " ciclo="+stock[i].CicloId+
@@ -125,7 +126,7 @@ function actualizaStock() {
               " grupos="+(parseInt(stock[i].GrTeorico != null ? stock[i].GrTeorico : 0)+parseInt(stock[i].GrPractico != null ? stock[i].GrPractico : 0))+
               (lastDependId != stock[i].DependId ? " class='cambio-top'" : (i+1<stock.length && lastDependId != stock[i+1].DependId ? " class='cambio-bottom'" : "")) +
               ">"+
-                 "<td>"+dependdesc+
+                 "<td>"+(dependNom ? "<a data-toggle='popover' data-content='"+"Nombre: "+dependNom+"'>"+dependdesc+"</a>" : dependdesc)+
             "</td><td>"+buscar(stock[i].PlanId, planes,"PlanId","PlanAbrev")+
             "</td><td>"+buscar(stock[i].CicloId, ciclos,"CicloId","CicloAbrev")+
             "</td><td>"+buscar(stock[i].TurnoId, turnos,"TurnoId","TurnoDesc")+
@@ -145,6 +146,9 @@ function actualizaStock() {
   $('#stock > tbody').html(html);
 
   fijoAnchoDeCelda();
+
+  // activo popovers
+  $('[data-toggle="popover"]').popover();
 
   actualizaDropDownsFilter();
 };
@@ -177,9 +181,10 @@ $(document).ready(function() {
 
 $(document).ready(function(){
   $(window).scroll(function(){
-    if (! $('#buscador').visible(true)) {
+    if (! $('#scroll-breakpoint').visible(true)) {
       $('#filtros').addClass('affix');
       $('#stock thead').addClass('affix');
+      $('#stock thead').css({'top': $('#filtros').height()+15+"px"});
     } else {
       $('#filtros').removeClass('affix');
       $('#stock thead').removeClass('affix');
