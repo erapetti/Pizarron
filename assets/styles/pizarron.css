@@ -10,11 +10,11 @@ a#credits {position:fixed;top:100%;left:0;margin-top:-27px;opacity:0.2;}
 div.separator {border-left:1px solid #d9d9d9;width:1px;height:200px;margin:auto;}
 div.dropdown {padding-top:4px;padding-bottom:4px;opacity:1;}
 div.nombre {padding:12px;font-weight:bold;}
-div#panel-buscador {width:1200px;height:100%;margin:10px auto 3em auto;padding:0;background-color:rgba(68,132,206,0.8);color:#d9d9d9;}
+div#panel-buscador {width:1200px;height:100%;margin:10px auto 14px auto;padding:0;background-color:rgba(68,132,206,0.8);color:#d9d9d9;}
 div#buscador {width:1200px;margin:0 auto;padding:0;background-color:rgba(68,132,206,0.8);color:#d9d9d9;}
 @media (min-width: 992px) {
   div#background {background-image:url("/images/fondo.jpeg");width:1400px;height:933px;}
-  div#contenido-index div#panel-buscador {top:20%;height:auto;position:absolute;}
+  div#contenido-index div#panel-buscador {top:20%;height:auto;position:relative;}
 }
 div#buscador .btn-default, div#buscador .btn-default:focus {background-color:#4484ce;color:#d9d9d9;border-color:#d9d9d9;}
 div#buscador div.open .btn-default {color:#f9cf00;border-color:#f9cf00;}
@@ -25,8 +25,9 @@ div#resultado table#stock tr.cambio-bottom td {padding-bottom:18px;}
 div#resultado table#stock tr.last-child td {border-bottom:1px solid #f19f4d;}
 div#resultado {opacity:0.9;width:1200px;margin:0 auto;}
 div#filtros.affix {position:fixed;top:0;background-color:rgba(68,132,206,1);color:#d9d9d9;width:100%;z-index:1;}
-table#stock thead.affix {position:fixed;top:70px;background-color:#fff;z-index:1;display:table;width:1136px;}
-table#stock { table-layout:fixed;}
+table#stock thead0 {display0:table;width:1198px;min-width:1198px;}
+table#stock thead.affix {position:fixed;top:70px;z-index:1;background-color:#fff;width:100%;}
+table#stock0 {table-layout:fixed;}
 table#stock th, table#stock td {text-align:center;}
 table#stock td {white-space:nowrap;}
 

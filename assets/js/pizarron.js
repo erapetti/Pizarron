@@ -92,7 +92,21 @@ function buscar(id,nombres,clave,valor,deft) {
   return (elem && elem[valor] != null ? elem[valor] : (deft ? deft : ""));
 };
 
-function actualizaStock(){
+function fijoAnchoDeCelda() {
+
+  var anchos = Array();
+  $('table#stock tbody tr:first-child td').each(function(i){
+    anchos[i] = $(this).css("width");
+    $(this).css({'width': anchos[i]}); //fijo el ancho en la CSS
+  });
+  $('table#stock thead tr th').each(function(i){
+    $(this).css({'width': anchos[i]}); //fijo el ancho en la CSS
+  });
+  $('table#stock thead tr').css({'width': $('table#stock tbody tr:first-child').css("width")});
+  $('table#stock thead').css({'width': $('table#stock tbody').css("width")});
+};
+
+function actualizaStock() {
   if (typeof stock === 'undefined') {
     return;
   }
@@ -109,7 +123,7 @@ function actualizaStock(){
               " opcion="+stock[i].OpcionId+
               " materia="+stock[i].MateriaId+
               " grupos="+(parseInt(stock[i].GrTeorico != null ? stock[i].GrTeorico : 0)+parseInt(stock[i].GrPractico != null ? stock[i].GrPractico : 0))+
-              (lastDependId != stock[i].DependId ? " class='cambio'" : "") +
+              (lastDependId != stock[i].DependId ? " class='cambio-top'" : (i+1<stock.length && lastDependId != stock[i+1].DependId ? " class='cambio-bottom'" : "")) +
               ">"+
                  "<td>"+dependdesc+
             "</td><td>"+buscar(stock[i].PlanId, planes,"PlanId","PlanAbrev")+
@@ -129,6 +143,9 @@ function actualizaStock(){
     lastDependId = stock[i].DependId;
   }
   $('#stock > tbody').html(html);
+
+  fijoAnchoDeCelda();
+
   actualizaDropDownsFilter();
 };
 $(document).ready(actualizaStock);
@@ -168,4 +185,11 @@ $(document).ready(function(){
       $('#stock thead').removeClass('affix');
     }
   })
+});
+
+// saco los créditos de la foto
+$(document).ready(function(){
+  window.setTimeout(function(){
+    $('a#credits').fadeOut();
+  },10000);
 });
