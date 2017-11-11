@@ -1,21 +1,30 @@
-body {background-image:url("/images/fondo.jpeg");background-repeat:no-repeat;}
-h1, h2 {font-family:Montserrat;text-align:center;}
-h1#titulo {width:100%;background-color:#d9d9d9;margin:0;padding:20px 0 10px 0;}
+body {background-color:#000;overflow-y:scroll}
+div#background {position:fixed;top:0;left:0;min-width:100%;min-height:100%;z-index:-1;overflow:hidden;}
 
-div.dropdown {padding-top:4px;padding-bottom:4px;}
+h1, h2 {font-family:Montserrat;text-align:center;}
+h1#titulo {width:100%;background-color:#f19f4d;color:#4484ce;margin:0;padding:20px 0 10px 0;background-image:url("/images/logo.png");background-repeat:no-repeat;background-position:left center;}
+
+a#credits {background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px;}
+a#credits {position:fixed;top:100%;left:0;margin-top:-27px;opacity:0.2;}
+
+div.separator {border-left:1px solid #d9d9d9;width:1px;height:200px;margin:auto;}
+div.dropdown {padding-top:4px;padding-bottom:4px;opacity:1;}
 div.nombre {padding:12px;font-weight:bold;}
-div#filtros.affix {position:fixed;top:0;background-color:#4484ce;color:#d9d9d9;width:100%;z-index:1;}
-div#buscador {width:100%;margin:0;padding:0;background-color:#4484ce;color:#d9d9d9;}
+div#filtros.affix {position:fixed;top:0;background-color:rgba(68,132,206,1);color:#d9d9d9;width:100%;z-index:1;}
+div#panel-buscador {width:100%;height:100%;margin:10px auto 3em auto;padding:0;background-color:rgba(68,132,206,0.8);color:#d9d9d9;}
+div#buscador {width:100%;margin:0;padding:0;background-color:rgba(68,132,206,0.8);color:#d9d9d9;}
+@media (min-width: 992px) {
+  div#background {background-image:url("/images/fondo.jpeg");width:1400px;height:933px;}
+  div#contenido-index div#panel-buscador {top:20%;height:auto;position:absolute;}
+}
 div#buscador .btn-default, div#buscador .btn-default:focus {background-color:#4484ce;color:#d9d9d9;border-color:#d9d9d9;}
 div#buscador div.open .btn-default {color:#f9cf00;border-color:#f9cf00;}
 div#buscador .row, div#buscador h1 {margin:0;padding:14px;}
 div#buscador input#buscar {background-color:#4484ce;color:#d9d9d9;border-radius:4px;border:1px solid #d9d9d9;padding:6px 12px;}
-div#resultado table#stock tr td:first-child  {border-left:2px solid #f19f4d;margin-left: 2px;}
-div#resultado table#stock tr td:last-child {border-right:1px solid #f19f4d;}
-div#resultado table#stock tr.cambio-top td, div#resultado table#stock tr.first-child td  {border-top:1px solid #f19f4d;padding-top:8px;}
-div#resultado table#stock tr.cambio-bottom td {padding-bottom:8px;}
+div#resultado table#stock tr.cambio-top td, div#resultado table#stock tr.first-child td  {border-top:1px solid #f19f4d;padding-top:18px;}
+div#resultado table#stock tr.cambio-bottom td {padding-bottom:18px;}
 div#resultado table#stock tr.last-child td {border-bottom:1px solid #f19f4d;}
-div#resultado {opacity:0.9;}
+div#resultado {opacity:0.9;width:95%;margin:0 auto;}
 
 .light {color:#f9cf00 !important;border-color:#f9cf00 !important}
 .tangerine {color:#f19f4d  !important;border-color:#f19f4d !important;}
