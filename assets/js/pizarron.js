@@ -33,7 +33,6 @@ function actualizaDropDownsFilter(){
 };
 
 function clickDropDown(event) {
-  event.preventDefault();
   // actualizo input
   $('#dd-'+$(this).attr('dd')).val( $(this).attr('data') );
   // actualizo etiqueta del botón
@@ -47,7 +46,6 @@ function clickDropDown(event) {
 
 // función para actualizar los dropdown-menu de tipo filtro cuando el usuario selecciona una opción
 function clickDropDownFilter(event) {
-  event.preventDefault();
   var elem = $(this);
   // actualizo input
   $('#dd-'+elem.attr('dd')).val( elem.attr('data') );
@@ -188,7 +186,7 @@ if ($('#contenido-resultado').length) {
       if (! $('#scroll-breakpoint').visible(true)) {
         $('#filtros').addClass('affix');
         $('#stock thead').addClass('affix');
-        $('#stock thead').css({'top': $('#filtros').height()+15+"px"});
+        $('#stock thead').css({'top': $('#filtros').css('height')});
       } else {
         $('#filtros').removeClass('affix');
         $('#stock thead').removeClass('affix');
