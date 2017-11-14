@@ -42,30 +42,30 @@ materias.push({MateriaId:"null",MateriaNombre:"N/C"});
     <div class="panel-body" id="buscador">
       <h1>Búsqueda de grupos</h1>
 
-      <form action="" method="post" autosubmit="1">
+      <form action="" method="post" autosubmit="1" class="form-inline" role="form">
         <div class="row">
-          <div class="col-sm-6">
-            Departamento:
+          <div class="form-group">
             <input type="hidden" name="departamento" id="dd-departamento" value="<%= departamento %>">
+            <label for="btn-dd-departamento" class="control-label">Departamento:</label>
             <div class="btn-group dropdown">
               <button id="btn-dd-departamento" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Departamento <span class="caret"></span>
               </button>
-              <ul class="dropdown-menu" aria-labelledby="btn-dd-departamento" dd="departamento">
+              <ul class="dropdown-menu columns2" aria-labelledby="btn-dd-departamento" dd="departamento">
                 <% departamentos.forEach(function(departamento){ -%>
                   <li><a href="#" dd="departamento" data="<%= departamento.DeptoId %>"><%= departamento.DeptoNombre %></a></li>
                 <% }) -%>
               </ul>
             </div>
           </div>
-          <div class="col-sm-6">
-            Asignatura:
+          <div class="form-group">
             <input type="hidden" name="asignatura" id="dd-asignatura" value="<%= asignatura %>">
+            <label for="btn-dd-asignatura" class="control-label">Asignatura:</label>
             <div class="btn-group dropdown">
               <button id="btn-dd-asignatura" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Asignatura <span class="caret"></span>
               </button>
-              <ul class="dropdown-menu" aria-labelledby="btn-dd-asignatura" dd="asignatura">
+              <ul class="dropdown-menu columns3" aria-labelledby="btn-dd-asignatura" dd="asignatura">
                 <% asignaturas.forEach(function(asignatura){ -%>
                   <li><a href="#" dd="asignatura" data="<%= asignatura.AsignId %>"><%= asignatura.AsignDesc %></a></li>
                 <% }) -%>
