@@ -107,8 +107,10 @@ module.exports = {
 		var asignatura = parseInt(req.param("asignatura"));
 
 		Stock.libres(departamento,asignatura,function(err,stock){
-
-			return res.json(err,stock);
+      if (err) {
+        return res.serverError(err);
+      }
+			return res.json(stock);
 		});
 	},
 
