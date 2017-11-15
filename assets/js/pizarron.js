@@ -104,7 +104,29 @@ function fijoAnchoDeCelda() {
   $('table#stock thead').css({'width': $('table#stock tbody').css("width")});
 };
 
+const REFRESH_INTERVAL = 60*1000; // medido en ms
+const CONFIRM_INTERVAL = 30; // medido en REFRESH_INTERVAL
+
+var pasada_actualizaStock = 0; // variable global para las confirmaciones
+var oldstock; // variable global para encontrar cambios en el stock
 function actualizaStock() {
+  if (pasada_actualizaStock > CONFIRM_INTERVAL) {
+    alert("¿Sigue ud. ahí?");
+    pasada_actualizaStock = 0;
+  }
+  pasada_actualizaStock += 1;
+  jQuery.getJSON( "stock", {departamento:departamento,asignatura:asignatura}, function(data){
+    if (typeof data !== 'undefined') {
+      oldstock = stock;
+      stock = data;
+      muestraStock();
+    }
+  });
+  setTimeout(actualizaStock,REFRESH_INTERVAL);
+};
+setTimeout(actualizaStock,REFRESH_INTERVAL);
+
+function muestraStock() {
   if (typeof stock === 'undefined') {
     $('#stock').html("");
     return;
@@ -121,7 +143,6 @@ function actualizaStock() {
     thead += "<th>"+valor+"</th>";
   });
   thead += "</tr>";
-  console.log(thead);
 
   var lastDependId = stock[0].DependId;
   var tbody = "";
@@ -167,7 +188,7 @@ function actualizaStock() {
 
   actualizaDropDownsFilter();
 };
-$(document).ready(actualizaStock);
+$(document).ready(muestraStock);
 
   // submit de formularios con autosubmit
 $("form[autosubmit=1] input").change(function(event) {
