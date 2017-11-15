@@ -1,5 +1,8 @@
 
 <script type="text/javascript">
+var departamento = <%= departamento %>;
+var asignatura = <%= asignatura %>;
+
 var departamentos = <%- JSON.stringify(departamentos) %>;
 var asignaturas = <%- JSON.stringify(asignaturas) %>;
 var dependencias = <%- JSON.stringify(dependencias) %>;
@@ -34,13 +37,12 @@ materias.push({MateriaId:"null",MateriaNombre:"N/C"});
 <div id="contenido-resultado">
 
   <div id="background" alt="" class="hidden-xs hidden-sm"></div>
-  <a id="credits" class="hidden-xs hidden-sm" href="https://unsplash.com/@pichler_sebastian?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Fotografía de Sebastian Pichler"><span class="glyphicon glyphicon-camera" aria-hidden="true"></span><span style="display:inline-block;padding:2px 3px;">Sebastian Pichler</span></a>
 
   <h1 id='titulo' class="hidden-xs">Elección de horas</h1>
 
   <div class="panel panel-default" id="panel-buscador">
     <div class="panel-body" id="buscador">
-      <h1>Búsqueda de grupos</h1>
+      <h1>Búsqueda de grupos disponibles</h1>
 
       <form action="" method="post" autosubmit="1" class="form-inline" role="form">
         <div class="row">
@@ -171,11 +173,6 @@ materias.push({MateriaId:"null",MateriaNombre:"N/C"});
 
         <div class="table-responsive">
           <table class="table" id="stock">
-            <thead>
-              <tr><th>Liceo</th><th>Plan</th><th>Ciclo</th><th>Turno</th><th>Grupo</th><th>Materia</th><th>Grupos<br/>Teórico</th><th>Grupos<br/>Práctico</th></tr>
-            </thead>
-            <tbody>
-            </tbody>
           </table>
         </div>
       <% } else { %>

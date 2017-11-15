@@ -106,14 +106,29 @@ function fijoAnchoDeCelda() {
 
 function actualizaStock() {
   if (typeof stock === 'undefined') {
+    $('#stock').html("");
     return;
   }
+
+  var columns = Array('Liceo','Plan','Ciclo','Turno','Grupo','Materia');
+  if (asignatura==2 || asignatura==9 || asignatura==19) {
+    columns.push('Grupos<br/>Teórico','Grupos<br/>Práctico');
+  } else {
+    columns.push('Grupos');
+  }
+  var thead= "<tr>";
+  columns.forEach(function(valor){
+    thead += "<th>"+valor+"</th>";
+  });
+  thead += "</tr>";
+  console.log(thead);
+
   var lastDependId = stock[0].DependId;
-  var html;
+  var tbody = "";
   for (var i = 0; i < stock.length; i++) {
     var dependdesc = buscar(stock[i].DependId, dependencias,"DependId","DependDesc");
     var dependNom = buscar(stock[i].DependId, dependencias,"DependId","DependNom",undefined);
-    html += "<tr dependencia="+stock[i].DependId+
+    tbody += "<tr dependencia="+stock[i].DependId+
               " plan="+stock[i].PlanId+
               " ciclo="+stock[i].CicloId+
               " turno="+stock[i].TurnoId+
@@ -137,11 +152,13 @@ function actualizaStock() {
                           "")+
             "</td><td>"+buscar(stock[i].MateriaId, materias,"MateriaId","MateriaNombre")+
             "</td><td>"+(stock[i].GrTeorico != null ? stock[i].GrTeorico : "")+
-            "</td><td>"+(stock[i].GrPractico != null ? stock[i].GrPractico : "")+
+            (asignatura==2 || asignatura==9 || asignatura==19 ?
+              "</td><td>"+(stock[i].GrPractico != null ? stock[i].GrPractico : "")
+              : "")+
             "</td></tr>";
     lastDependId = stock[i].DependId;
   }
-  $('#stock > tbody').html(html);
+  $('#stock').html("<thead>"+thead+"</thead><tbody>"+tbody+"</tbody>");
 
   fijoAnchoDeCelda();
 
@@ -190,12 +207,15 @@ if ($('#contenido-resultado').length) {
       } else {
         $('#filtros').removeClass('affix');
         $('#stock thead').removeClass('affix');
+        $('#stock thead').removeAttr('style');
       }
     }
   });
 }
 
 // saco los créditos de la foto
-window.setTimeout(function(){
-  $('a#credits').fadeOut();
-},10000);
+if ($('a#credits').length) {
+  window.setTimeout(function(){
+    $('a#credits').fadeOut();
+  },10000);
+}
