@@ -182,6 +182,7 @@ function muestraStock() {
   $('#stock').html("<thead>"+thead+"</thead><tbody>"+tbody+"</tbody>");
 
   fijoAnchoDeCelda();
+  filtroStock();
 
   // activo popovers
   $('[data-toggle="popover"]').popover();
