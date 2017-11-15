@@ -28,8 +28,7 @@ module.exports = {
              sum(if(elcCodMovElecId=1,PizGrp2doPractico,0)-if(elcCodMovElecId>1 and p.fnccedula>0,PizGrp2doPractico,0)) GrPractico
       from webces.ELCPIZARRON p
       join Personal.TRAD_CURSO_MAT t on p.CursoId=t.CursoId and p.AsignId=t.TradAsignIdElc and if(p.PizGrp2doPractico=0,1,2)=t.TradTipoDictado and p.PizYear=t.TradCurrYear
-      /* where PizYear=year(curdate())+if(month(curdate())>11,1,0) */
-      where PizYear=2017
+      where PizYear>=year(curdate())
        and GrupIntId<>90
        and PizDeptoId=?
        and GrupIntId=?
