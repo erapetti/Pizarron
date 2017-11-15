@@ -36,7 +36,8 @@ module.exports = {
     level: "info"
   },
 
-  memcached: [ 'smemcache01.ces.edu.uy:11211' ],
+  //memcached: [ 'smemcache01.ces.edu.uy:11211' ],
+  memcached: [ '127.0.0.1:11211' ],
 
 
 };
