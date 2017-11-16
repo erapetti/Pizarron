@@ -102,6 +102,9 @@ function fijoAnchoDeCelda() {
   });
   $('table#stock thead tr').css({'width': $('table#stock tbody tr:first-child').css("width")});
   $('table#stock thead').css({'width': $('table#stock tbody').css("width")});
+
+  //fijo los tamaños de los placeholders
+  $('#filtros_placeholder').css({width: $('#filtros').css('width'), height: $('#filtros').css('height')});
 };
 
 const REFRESH_INTERVAL = 60*1000; // medido en ms
@@ -179,6 +182,7 @@ function muestraStock() {
             "</td></tr>";
     lastDependId = stock[i].DependId;
   }
+  $('#stock thead,#stock tbody').remove();
   $('#stock').html("<thead>"+thead+"</thead><tbody>"+tbody+"</tbody>");
 
   fijoAnchoDeCelda();
@@ -222,7 +226,7 @@ if ($('#contenido-resultado').length) {
   $(window).scroll(function(){
     if (!$('.dropdown.open').length) {
       // no tengo un menú abierto
-      if (! $('#scroll-breakpoint').visible(true)) {
+      if( $('#scroll-breakpoint').offset().top < $(window).scrollTop() ) {
         $('#filtros').addClass('affix');
         $('#stock thead').addClass('affix');
         $('#stock thead').css({'top': $('#filtros').css('height')});
