@@ -37,7 +37,7 @@ div#resultado table#stock tr.cambio-bottom td {padding-bottom:18px;}
 div#resultado table#stock tr.last-child td {border-bottom:1px solid #f19f4d;}
 div#resultado table#stock a {text-decoration:none;color:#000;cursor:pointer;}
 div#resultado table#stock a:hover {text-decoration:underline;color:#f19f4d;}
-div#resultado {opacity:0.9;width:1200px;margin:0 auto 40px auto;}
+div#resultado {opacity:0.9;width:1200px;margin:0 auto 80px auto;}
 div#filtros.affix {position:fixed;top:0;left:0;background-color:rgba(68,132,206,1);color:#d9d9d9;width:100%;z-index:2;}
 table#stock thead.affix {position:fixed;top:70px;z-index:2;background-color:#fff;}
 table#stock th, table#stock td {text-align:center;}
