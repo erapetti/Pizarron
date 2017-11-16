@@ -110,6 +110,7 @@ function fijoAnchoDeCelda() {
 const REFRESH_INTERVAL = 60*1000; // medido en ms
 const CONFIRM_INTERVAL = 30; // medido en REFRESH_INTERVAL
 
+var _csrf = $('#_csrf').val();
 var pasada_actualizaStock = 0; // variable global para las confirmaciones
 var oldstock; // variable global para encontrar cambios en el stock
 function actualizaStock() {
@@ -118,7 +119,7 @@ function actualizaStock() {
     pasada_actualizaStock = 0;
   }
   pasada_actualizaStock += 1;
-  jQuery.getJSON( "stock", {departamento:departamento,asignatura:asignatura}, function(data){
+  jQuery.getJSON( "stock", {_csrf:_csrf,departamento:departamento,asignatura:asignatura}, function(data){
     if (typeof data !== 'undefined') {
       oldstock = stock;
       stock = data;

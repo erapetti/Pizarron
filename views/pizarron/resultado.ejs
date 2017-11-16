@@ -45,6 +45,7 @@ materias.push({MateriaId:"null",MateriaNombre:"N/C"});
       <h1>Búsqueda de grupos disponibles</h1>
 
       <form action="" method="post" autosubmit="1" class="form-inline" role="form">
+        <input type='hidden' name='_csrf' value='<%= _csrf %>' id="_csrf">
         <div class="row">
           <div class="form-group">
             <input type="hidden" name="departamento" id="dd-departamento" value="<%= departamento %>">

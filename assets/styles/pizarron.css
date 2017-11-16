@@ -15,7 +15,7 @@ div.dropdown {padding-top:4px;padding-bottom:4px;opacity:1;}
 
 h1#titulo {width:100%;background-color:#f19f4d;color:#4484ce;margin:0 auto;padding:20px 0 10px 0;background-image:url("../images/logo.png");background-repeat:no-repeat;background-position:left center;}
 a#credits {background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px;}
-a#credits {position:fixed;top:100%;left:0;margin-top:-27px;opacity:0.2;}
+a#credits {position:fixed;top:100%;left:0;margin-top:-27px;opacity:0.4;}
 
 div#background {position:fixed;bottom:0;left:0;min-width:100%;min-height:100%;z-index:-10;overflow0:hidden;}
 @media screen and (min-width:992px) {
@@ -32,16 +32,17 @@ div#buscador .btn-default, div#buscador .btn-default:focus {background-color:#44
 div#buscador div.open .btn-default {color:#f9cf00;border-color:#f9cf00;}
 div#buscador .row, div#buscador h1 {margin:0;padding:14px;}
 
+div#resultado {opacity:0.9;width:1200px;margin:0 auto 80px auto;padding-bottom:40px;}
 div#resultado table#stock tr.cambio-top td, div#resultado table#stock tr.first-child td  {border-top:1px solid #f19f4d;padding-top:18px;}
 div#resultado table#stock tr.cambio-bottom td {padding-bottom:18px;}
 div#resultado table#stock tr.last-child td {border-bottom:1px solid #f19f4d;}
 div#resultado table#stock a {text-decoration:none;color:#000;cursor:pointer;}
 div#resultado table#stock a:hover {text-decoration:underline;color:#f19f4d;}
-div#resultado {opacity:0.9;width:1200px;margin:0 auto 80px auto;}
+div#resultado table#stock thead.affix {position:fixed;top:70px;z-index:2;background-color:#fff;}
+div#resultado table#stock th, table#stock td {text-align:center;}
+div#resultado table#stock td {white-space:nowrap;}
+
 div#filtros.affix {position:fixed;top:0;left:0;background-color:rgba(68,132,206,1);color:#d9d9d9;width:100%;z-index:2;}
-table#stock thead.affix {position:fixed;top:70px;z-index:2;background-color:#fff;}
-table#stock th, table#stock td {text-align:center;}
-table#stock td {white-space:nowrap;}
 
 .light {color:#f9cf00 !important;border-color:#f9cf00 !important}
 .tangerine {color:#f19f4d  !important;border-color:#f19f4d !important;}
