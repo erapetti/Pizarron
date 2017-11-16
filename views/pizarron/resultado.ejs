@@ -79,85 +79,87 @@ materias.push({MateriaId:"null",MateriaNombre:"N/C"});
 
       <div id="scroll-breakpoint"></div>
 
-      <div class="row" id="filtros">
-        <div class="col-sm-1" style="padding-top:11px">
-          Filtrar por:
-        </div>
-        <div class="col-sm-11">
-          <div class="btn-group" role="group" aria-label="filtros">
+      <div id="filtros_placeholder">
+        <div class="row" id="filtros">
+          <div class="col-sm-1" style="padding-top:11px">
+            Filtrar por:
+          </div>
+          <div class="col-sm-11">
+            <div class="btn-group" role="group" aria-label="filtros">
 
-            <input type="hidden" name="dependencia" id="dd-dependencia">
-            <div class="btn-group dropdown">
-              <button id="btn-dd-dependencia" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dependencia <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="btn-dd-dependencia" dd="dependencia">
-              </ul>
+              <input type="hidden" name="dependencia" id="dd-dependencia">
+              <div class="btn-group dropdown">
+                <button id="btn-dd-dependencia" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Dependencia <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="btn-dd-dependencia" dd="dependencia">
+                </ul>
+              </div>
+
+              <input type="hidden" name="plan" id="dd-plan">
+              <div class="btn-group dropdown">
+                <button id="btn-dd-plan" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Plan <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="btn-dd-plan" dd="plan">
+                </ul>
+              </div>
+
+              <input type="hidden" name="ciclo" id="dd-ciclo">
+              <div class="btn-group dropdown">
+                <button id="btn-dd-ciclo" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Ciclo <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="btn-dd-ciclo" dd="ciclo">
+                </ul>
+              </div>
+
+              <input type="hidden" name="grado" id="dd-grado">
+              <div class="btn-group dropdown">
+                <button id="btn-dd-grado" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Grado <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="btn-dd-grado" dd="grado">
+                </ul>
+              </div>
+
+              <input type="hidden" name="turno" id="dd-turno">
+              <div class="btn-group dropdown">
+                <button id="btn-dd-turno" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Turno <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="btn-dd-turno" dd="turno">
+                </ul>
+              </div>
+
+              <input type="hidden" name="orientacion" id="dd-orientacion">
+              <div class="btn-group dropdown">
+                <button id="btn-dd-orientacion" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Orientación <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="btn-dd-orientacion" dd="orientacion">
+                </ul>
+              </div>
+
+              <input type="hidden" name="opcion" id="dd-opcion">
+              <div class="btn-group dropdown">
+                <button id="btn-dd-opcion" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Opción <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="btn-dd-opcion" dd="opcion">
+                </ul>
+              </div>
+
+              <input type="hidden" name="materia" id="dd-materia">
+              <div class="btn-group dropdown">
+                <button id="btn-dd-materia" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Materia <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="btn-dd-materia" dd="materia">
+                </ul>
+              </div>
+
             </div>
-
-            <input type="hidden" name="plan" id="dd-plan">
-            <div class="btn-group dropdown">
-              <button id="btn-dd-plan" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Plan <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="btn-dd-plan" dd="plan">
-              </ul>
-            </div>
-
-            <input type="hidden" name="ciclo" id="dd-ciclo">
-            <div class="btn-group dropdown">
-              <button id="btn-dd-ciclo" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Ciclo <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="btn-dd-ciclo" dd="ciclo">
-              </ul>
-            </div>
-
-            <input type="hidden" name="grado" id="dd-grado">
-            <div class="btn-group dropdown">
-              <button id="btn-dd-grado" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Grado <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="btn-dd-grado" dd="grado">
-              </ul>
-            </div>
-
-            <input type="hidden" name="turno" id="dd-turno">
-            <div class="btn-group dropdown">
-              <button id="btn-dd-turno" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Turno <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="btn-dd-turno" dd="turno">
-              </ul>
-            </div>
-
-            <input type="hidden" name="orientacion" id="dd-orientacion">
-            <div class="btn-group dropdown">
-              <button id="btn-dd-orientacion" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Orientación <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="btn-dd-orientacion" dd="orientacion">
-              </ul>
-            </div>
-
-            <input type="hidden" name="opcion" id="dd-opcion">
-            <div class="btn-group dropdown">
-              <button id="btn-dd-opcion" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Opción <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="btn-dd-opcion" dd="opcion">
-              </ul>
-            </div>
-
-            <input type="hidden" name="materia" id="dd-materia">
-            <div class="btn-group dropdown">
-              <button id="btn-dd-materia" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Materia <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="btn-dd-materia" dd="materia">
-              </ul>
-            </div>
-
           </div>
         </div>
       </div>
