@@ -197,7 +197,7 @@ function muestraStock() {
   actualizaDropDownsFilter();
 };
 if ($('#contenido-resultado').length) {
-  muestraStock());
+  muestraStock();
 }
 
   // submit de formularios con autosubmit
