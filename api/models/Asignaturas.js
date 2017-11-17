@@ -19,12 +19,11 @@ module.exports = {
 			primaryKey: true
 		},
 		AsignDesc: 'string',
-		TipoEscalafon: 'string',
 	},
 
 	webces: function(objParam,callback) {
 		return this.query(`
-			select GrupintId AsignId,GrupintDesc AsignDesc, 'H' TipoEscalafon
+			select GrupintId AsignId,GrupintDesc AsignDesc
 			from webces.ELCGRUPOSINTERES join webces.ELCPIZARRON using (GrupintId)
 			where fnccedula=0 and GrupintDHF<>'S' and GrupintFlotante<>'F'
 			group by 1,2
