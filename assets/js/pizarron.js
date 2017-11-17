@@ -131,7 +131,7 @@ function actualizaStock() {
 setTimeout(actualizaStock,REFRESH_INTERVAL);
 
 function muestraStock() {
-  if (typeof stock === 'undefined') {
+  if (typeof stock[0] === 'undefined') {
     $('#stock').html("");
     return;
   }
