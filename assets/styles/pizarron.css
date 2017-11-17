@@ -53,7 +53,7 @@ div#filtros.affix {position:fixed;top:0;left:0;background-color:rgba(68,132,206,
   font-family: 'Roboto';
   src: local('Roboto'),
        local('Roboto-Regular'),
-       url('fonts/Roboto.woff2') format('woff2');
+       url('../styles/fonts/Roboto.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   unicode-range: U+0-FF, U+131, U+152-153, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
@@ -62,8 +62,8 @@ div#filtros.affix {position:fixed;top:0;left:0;background-color:rgba(68,132,206,
   font-family: 'Montserrat';
   src: local('Montserrat'),
          local('Montserrat-Regular'),
-         url('fonts/Montserrat-Regular.woff2') format('woff2'),
-         url('fonts/Montserrat-Regular.woff') format('woff');
+         url('../styles/fonts/Montserrat-Regular.woff2') format('woff2'),
+         url('../styles/fonts/Montserrat-Regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
 }
