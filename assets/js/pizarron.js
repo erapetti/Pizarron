@@ -128,10 +128,12 @@ function actualizaStock() {
   });
   setTimeout(actualizaStock,REFRESH_INTERVAL);
 };
-setTimeout(actualizaStock,REFRESH_INTERVAL);
+if ($('#contenido-resultado').length) {
+  setTimeout(actualizaStock,REFRESH_INTERVAL);
+}
 
 function muestraStock() {
-  if (typeof stock[0] === 'undefined') {
+  if (typeof stock === 'undefined' || typeof stock[0] === 'undefined') {
     $('#stock').html("");
     return;
   }
@@ -194,7 +196,9 @@ function muestraStock() {
 
   actualizaDropDownsFilter();
 };
-$(document).ready(muestraStock);
+if ($('#contenido-resultado').length) {
+  muestraStock());
+}
 
   // submit de formularios con autosubmit
 $("form[autosubmit=1] input").change(function(event) {
