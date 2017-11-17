@@ -32,7 +32,7 @@ div#buscador .btn-default, div#buscador .btn-default:focus {background-color:#44
 div#buscador div.open .btn-default {color:#f9cf00;border-color:#f9cf00;}
 div#buscador .row, div#buscador h1 {margin:0;padding:14px;}
 
-div#resultado {opacity:0.9;width:1200px;margin:0 auto 80px auto;padding-bottom:40px;}
+div#resultado {opacity:0.95;width:1200px;margin:0 auto 80px auto;padding-bottom:40px;}
 div#resultado table#stock tr.cambio-top td, div#resultado table#stock tr.first-child td  {border-top:1px solid #f19f4d;padding-top:18px;}
 div#resultado table#stock tr.cambio-bottom td {padding-bottom:18px;}
 div#resultado table#stock tr.last-child td {border-bottom:1px solid #f19f4d;}
