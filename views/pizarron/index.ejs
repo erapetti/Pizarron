@@ -44,7 +44,7 @@ var asignaturas = <%- JSON.stringify(asignaturas) %>;
                 <button id="btn-dd-asignatura" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Asignatura <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu columns3" aria-labelledby="btn-dd-asignatura" dd="asignatura">
+                <ul class="dropdown-menu columns3left" aria-labelledby="btn-dd-asignatura" dd="asignatura">
                   <% asignaturas.forEach(function(asignatura){ -%>
                     <li><a href="#" dd="asignatura" data="<%= asignatura.AsignId %>"><%= asignatura.AsignDesc %></a></li>
                   <% }) -%>

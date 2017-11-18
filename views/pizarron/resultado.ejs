@@ -68,7 +68,7 @@ materias.push({MateriaId:"null",MateriaNombre:"N/C"});
               <button id="btn-dd-asignatura" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Asignatura <span class="caret"></span>
               </button>
-              <ul class="dropdown-menu columns3" aria-labelledby="btn-dd-asignatura" dd="asignatura">
+              <ul class="dropdown-menu columns3left" aria-labelledby="btn-dd-asignatura" dd="asignatura">
                 <% asignaturas.forEach(function(asignatura){ -%>
                   <li><a href="#" dd="asignatura" data="<%= asignatura.AsignId %>"><%= asignatura.AsignDesc %></a></li>
                 <% }) -%>
@@ -93,7 +93,7 @@ materias.push({MateriaId:"null",MateriaNombre:"N/C"});
                 <button id="btn-dd-dependencia" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Dependencia <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="btn-dd-dependencia" dd="dependencia">
+                <ul class="dropdown-menu columns3" aria-labelledby="btn-dd-dependencia" dd="dependencia">
                 </ul>
               </div>
 
