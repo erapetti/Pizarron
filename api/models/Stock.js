@@ -14,7 +14,7 @@ module.exports = {
   attributes: {
     DependId: 'integer',
   },
-  libres: function(DeptoId,AsignId,callback){
+  libres: function(objParam,callback){
     return this.query(`
       select DependId,
              TradPlanId PlanId,
@@ -35,7 +35,7 @@ module.exports = {
       group by 1,2,3,4,5,6,7,8
       having GrTeorico+GrPractico>0
     `,
-    [DeptoId,AsignId],
+    [objParam.DeptoId,objParam.AsignId],
     callback);
   },
 };
