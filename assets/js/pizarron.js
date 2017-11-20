@@ -124,6 +124,10 @@ function actualizaStock() {
       oldstock = stock;
       stock = data;
       muestraStock();
+      if( $('#scroll-breakpoint').offset().top < $(window).scrollTop() ) {
+        $('#stock thead').addClass('affix');
+        $('#stock thead').css({'top': $('#filtros').css('height')});
+      }
     }
   });
   setTimeout(actualizaStock,REFRESH_INTERVAL);
