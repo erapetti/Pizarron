@@ -5,6 +5,9 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
+var Memcached = require('memcached');
+sails.memcached = new Memcached(sails.config.memcached);
+
 // Función auxiliar para calcular un código de hash a partir de un string
 // la voy a usar para definir la clave de memcached asociada a una query
 String.prototype.hashCode = function() {
@@ -32,6 +35,7 @@ sails.config.models.cacheFind = function (objQuery,callback) {
   sails.memcached.get(memkey, function (err, memresult) {
     if (!err && typeof memresult !== 'undefined' && memresult != false) {
       // cache hit
+      //console.log("cache hit: "+memkey);
       return callback(undefined, memresult);
     }
     // ignoro las situaciones de error
@@ -90,9 +94,6 @@ module.exports = {
 
 	index: function(req,res) {
 
-		var Memcached = require('memcached');
-		sails.memcached = new Memcached(sails.config.memcached);
-
 		Departamentos.cacheFind({DeptoId:{'<':20}},function(err,departamentos){
 			if (err) {
 				return res.serverError(err);
@@ -110,7 +111,7 @@ module.exports = {
 		var departamento = parseInt(req.param("departamento"));
 		var asignatura = parseInt(req.param("asignatura"));
 
-		Stock.cacheCall("libres",Stock.libres,{DeptoId:departamento,AsignId:asignatura},60,function(err,stock){
+		Stock.cacheCall("libres",Stock.libres,{DeptoId:departamento,AsignId:asignatura},70,function(err,stock){
       if (err) {
         return res.serverError(err);
       }
@@ -126,10 +127,7 @@ module.exports = {
 				return res.serverError(new Error("Parámetros incorrectos"));
 		}
 
-		var Memcached = require('memcached');
-		sails.memcached = new Memcached(sails.config.memcached);
-
-		Stock.cacheCall("libres",Stock.libres,{DeptoId:departamento,AsignId:asignatura},60,function(err,stock){
+		Stock.cacheCall("libres",Stock.libres,{DeptoId:departamento,AsignId:asignatura},70,function(err,stock){
 			if (err) {
 				return res.serverError(err);
 			}
