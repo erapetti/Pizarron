@@ -95,10 +95,14 @@ function fijoAnchoDeCelda() {
   var anchos = Array();
   $('table#stock tbody tr:first-child td').each(function(i){
     anchos[i] = $(this).css("width");
+  });
+  $('table#stock thead tr:first-child th').each(function(i){
     $(this).css({'width': anchos[i]}); //fijo el ancho en la CSS
   });
-  $('table#stock thead tr th').each(function(i){
-    $(this).css({'width': anchos[i]}); //fijo el ancho en la CSS
+  $('table#stock tbody tr').each(function(){
+    $(this).find('td').each(function(i){
+      $(this).css({'width': anchos[i]}); //fijo el ancho en la CSS
+    });
   });
   $('table#stock thead tr').css({'width': $('table#stock tbody tr:first-child').css("width")});
   $('table#stock thead').css({'width': $('table#stock tbody').css("width")});
