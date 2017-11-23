@@ -163,6 +163,10 @@ function muestraStock() {
   for (var i = 0; i < stock.length; i++) {
     var dependdesc = buscar(stock[i].DependId, dependencias,"DependId","DependDesc");
     var dependNom = buscar(stock[i].DependId, dependencias,"DependId","DependNom",undefined);
+    var GrTeorico = parseInt(stock[i].GrTeorico != null ? stock[i].GrTeorico : 0);
+    var GrPractico = parseInt(stock[i].GrPractico != null ? stock[i].GrPractico : 0);
+    var HsTeorico = parseInt(stock[i].HsTeorico != null ? stock[i].HsTeorico : 0);
+    var HsPractico = parseInt(stock[i].HsPractico != null ? stock[i].HsPractico : 0);
     tbody += "<tr dependencia="+stock[i].DependId+
               " plan="+stock[i].PlanId+
               " ciclo="+stock[i].CicloId+
@@ -171,26 +175,33 @@ function muestraStock() {
               " orientacion="+stock[i].OrientacionId+
               " opcion="+stock[i].OpcionId+
               " materia="+stock[i].MateriaId+
-              " grupos="+(parseInt(stock[i].GrTeorico != null ? stock[i].GrTeorico : 0)+parseInt(stock[i].GrPractico != null ? stock[i].GrPractico : 0))+
-              (lastDependId != stock[i].DependId ? " class='cambio-top'" : (i+1<stock.length && lastDependId != stock[i+1].DependId ? " class='cambio-bottom'" : "")) +
+              " grupos="+(GrTeorico+GrPractico)+
+              (lastDependId != stock[i].DependId ?
+                 " class='cambio-top'" : ""
+               ) +
+              (i+1<stock.length && stock[i].DependId != stock[i+1].DependId ?
+                " class='cambio-bottom'" : ""
+              ) +
               ">"+
-                 "<td>"+(dependNom ? "<a data-toggle='popover' data-content='"+"Nombre: "+dependNom+"'>"+dependdesc+"</a>" : dependdesc)+
-            "</td><td>"+buscar(stock[i].PlanId, planes,"PlanId","PlanAbrev")+
-            "</td><td>"+buscar(stock[i].CicloId, ciclos,"CicloId","CicloAbrev")+
-            "</td><td>"+buscar(stock[i].TurnoId, turnos,"TurnoId","TurnoDesc")+
-            "</td><td>"+(stock[i].GradoId != null ?
-                          buscar(stock[i].GradoId, grados,"GradoId","GradoAbrev")+
-                          (stock[i].OpcionId == null || stock[i].OpcionId == 1 ?
-                            " "+buscar(stock[i].OrientacionId, orientaciones,"OrientacionId","OrientacionAbrev") :
-                            " "+buscar(stock[i].OpcionId, opciones,"OpcionId","OpcionAbrev")
-                          ) :
-                          "")+
-            "</td><td>"+buscar(stock[i].MateriaId, materias,"MateriaId","MateriaNombre")+
-            "</td><td>"+(stock[i].GrTeorico != null ? stock[i].GrTeorico : "")+
-            (asignatura==2 || asignatura==9 || asignatura==19 ?
-              "</td><td>"+(stock[i].GrPractico != null ? stock[i].GrPractico : "")
-              : "")+
-            "</td></tr>";
+              "<td>"+(dependNom ?
+                        "<a data-toggle='popover' data-content='Nombre: "+dependNom+"'>"+dependdesc+"</a>" : dependdesc
+              )+
+              "</td><td>"+buscar(stock[i].PlanId, planes,"PlanId","PlanAbrev")+
+              "</td><td>"+buscar(stock[i].CicloId, ciclos,"CicloId","CicloAbrev")+
+              "</td><td>"+buscar(stock[i].TurnoId, turnos,"TurnoId","TurnoDesc")+
+              "</td><td>"+(stock[i].GradoId != null ?
+                            buscar(stock[i].GradoId, grados,"GradoId","GradoAbrev")+
+                            (stock[i].OpcionId == null || stock[i].OpcionId == 1 ?
+                              " "+buscar(stock[i].OrientacionId, orientaciones,"OrientacionId","OrientacionAbrev") :
+                              " "+buscar(stock[i].OpcionId, opciones,"OpcionId","OpcionAbrev")
+                            ) :
+                            "")+
+              "</td><td>"+buscar(stock[i].MateriaId, materias,"MateriaId","MateriaNombre")+
+              "</td><td><a data-toggle='popover' data-content='Horas: "+HsTeorico+"'>"+GrTeorico+"</a>"+
+              (asignatura==2 || asignatura==9 || asignatura==19 ?
+                "</td><td><a data-toggle='popover' data-content='Horas: "+HsPractico+"'>"+GrPractico+"</a>" : ""
+              )+
+              "</td></tr>";
     lastDependId = stock[i].DependId;
   }
   $('#stock thead,#stock tbody').remove();
