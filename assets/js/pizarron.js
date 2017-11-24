@@ -251,13 +251,21 @@ if ($('#contenido-resultado').length) {
     if (!$('.dropdown.open').length) {
       // no tengo un menú abierto
       if( $('#scroll-breakpoint').offset().top < $(window).scrollTop() ) {
-        $('#filtros').addClass('affix');
-        $('#stock thead').addClass('affix');
-        $('#stock thead').css({'top': $('#filtros').css('height')});
+        if (! $('#filtros.affix').length) {
+          $('#filtros').addClass('affix');
+          $('#stock thead').addClass('affix');
+          $('#stock thead').css({'top': $('#filtros').css('height')});
+          var header_height = $('#filtros').height() + $('#stock thead').height() + 28;
+          if ($(window).scrollTop() < $('#stock tbody tr:first-child:visible').offset().top - header_height) {
+            $(window).scrollTop( $('#stock tbody tr:first-child:visible').offset().top - header_height);
+          }
+        }
       } else {
-        $('#filtros').removeClass('affix');
-        $('#stock thead').removeClass('affix');
-        $('#stock thead').removeAttr('style');
+        if ($('#filtros.affix').length) {
+          $('#filtros').removeClass('affix');
+          $('#stock thead').removeClass('affix');
+          $('#stock thead').removeAttr('style');
+        }
       }
     }
   });
