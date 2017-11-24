@@ -83,12 +83,12 @@ materias.push({MateriaId:"null",MateriaNombre:"N/C"});
       <div id="filtros_placeholder">
         <div class="row" id="filtros">
 
-          <div class="col-sm-1">
-            <a href="#" onclick="$(window).scrollTop(0)">
-              <label><span class="glyphicon glyphicon-home" aria-hidden="true"></span></label>
-            </a>
-          </div>
-          <div class="col-sm-11">
+          <div class="col-sm-12">
+            <div class="btn-group">
+              <a href="#" onclick="$('html,body').stop().animate({scrollTop:0},500)" class="btn btn-default">
+                <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+              </a>
+            </div>
             <label>Filtrar&nbsp;por:</label>
             <div class="btn-group" role="group" aria-label="filtros">
 
