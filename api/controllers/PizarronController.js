@@ -124,6 +124,7 @@ module.exports = {
 		var asignatura = parseInt(req.param("asignatura"));
 
 		if (!departamento || !asignatura) {
+        console.log("resultado: departamento="+departamento+" asignatura="+asignatura);
 				return res.serverError(new Error("Parámetros incorrectos"));
 		}
 
