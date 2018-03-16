@@ -124,8 +124,9 @@ module.exports = {
 		var asignatura = parseInt(req.param("asignatura"));
 
 		if (!departamento || !asignatura) {
-        console.log("resultado: departamento="+departamento+" asignatura="+asignatura);
-				return res.serverError(new Error("Parámetros incorrectos"));
+				// console.log("resultado: parámetros incorrectos url="+req.originalUrl+" referrer="+req.headers.referer);
+				// return res.serverError(new Error("Parámetros incorrectos"));
+				return res.redirect(sails.config.baseurl+"pizarron/");
 		}
 
 		Stock.cacheCall("libres",Stock.libres,{DeptoId:departamento,AsignId:asignatura},70,function(err,stock){
@@ -148,6 +149,9 @@ module.exports = {
 						dependencias.forEach(function(d){
 							if (d.DependDesc) {
 								d.DependDesc = d.DependDesc.replace(/"/g, "");
+                if (d.DependDesc.length > 25) {
+                  d.DependDesc = d.DependDesc.substr(0,15)+"..."+d.DependDesc.substr(d.DependDesc.length-6);
+                }
 							}
 							if (d.DependNom) {
 								d.DependNom = d.DependNom.replace(/"/g, "");
