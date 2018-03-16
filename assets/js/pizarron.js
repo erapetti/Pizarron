@@ -8,7 +8,8 @@ function actualizaDropDownFilter(dd,nombres,clave,attrNombre){
     }
   });
   // Armo las opciones del dropdown
-  var html = '<li><a href="#" dd="'+dd+'" data="">'+(nombres.find(function(n){return n[clave] == ""}))[attrNombre]+'</a></li><li class="divider"></li>';
+  var html = '<li><a href="#" dd="'+dd+'" data="">'+(nombres.find(function(n){return n[clave] == ""}))[attrNombre]+'</a></li>';
+  html += '<li class="divider"></li>';
   for (var id in cant) {
     var obj = nombres.find(function(n){return n[clave] == id});
     if (obj) {
@@ -184,7 +185,8 @@ function muestraStock() {
               ) +
               ">"+
               "<td>"+(dependNom ?
-                        "<a data-toggle='popover' data-content='Nombre: "+dependNom+"'>"+dependdesc+"</a>" : dependdesc
+                        "<a data-toggle='popover' data-content='Nombre: "+dependNom+"'>"+dependdesc+"</a><div class='hidden-md hidden-sd hidden-xs' style='color:#888888'>"+dependNom+"</div>"
+			: dependdesc
               )+
               "</td><td>"+buscar(stock[i].PlanId, planes,"PlanId","PlanAbrev")+
               "</td><td>"+buscar(stock[i].CicloId, ciclos,"CicloId","CicloAbrev")+
