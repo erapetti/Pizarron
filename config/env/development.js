@@ -25,4 +25,5 @@ module.exports = {
 
   memcached: [ '127.0.0.1:11211' ],
 
+  baseurl: 'http://localhost:1337/',
 };

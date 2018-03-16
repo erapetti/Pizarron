@@ -39,5 +39,5 @@ module.exports = {
   //memcached: [ 'smemcache01.ces.edu.uy:11211' ],
   memcached: [ '127.0.0.1:11211' ],
 
-
+  baseurl: 'http://servicios.ces.edu.uy/node/pizarron/',
 };
