@@ -33,11 +33,11 @@ module.exports = {
       where PizYear>=year(curdate())
        and GrupIntId<>90
        and PizDeptoId=?
-       and GrupIntId=?
+       and (GrupIntId=? or (? in (9,19) and GrupIntId=91))
       group by 1,2,3,4,5,6,7,8
       having GrTeorico+GrPractico>0
     `,
-    [objParam.DeptoId,objParam.AsignId],
+    [objParam.DeptoId,objParam.AsignId,objParam.AsignId],
     callback);
   },
 };
