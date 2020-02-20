@@ -33,7 +33,7 @@ module.exports = {
       where PizYear>=year(curdate())
        and GrupIntId<>90
        and PizDeptoId=?
-       and (GrupIntId=? or (? in (9,19) and GrupIntId=91))
+       and (GrupIntId=? or (? in (9,19) and (GrupIntId=91 or GrupIntId in (9,19) and p.fnccedula>0)))
       group by 1,2,3,4,5,6,7,8
       having GrTeorico+GrPractico>0
     `,
