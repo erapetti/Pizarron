@@ -10,12 +10,14 @@ function actualizaDropDownFilter(dd,nombres,clave,attrNombre){
   // Armo las opciones del dropdown
   var html = '<li><a href="#" dd="'+dd+'" data="">'+(nombres.find(function(n){return n[clave] == ""}))[attrNombre]+'</a></li>';
   html += '<li class="divider"></li>';
-  for (var id in cant) {
-    var obj = nombres.find(function(n){return n[clave] == id});
-    if (obj) {
-      html += '<li><a href="#" dd="'+dd+'" data="'+id+'">'+obj[attrNombre]+' ('+cant[id]+')</a></li>';
+  nombres.sort(function(a,b){return a[attrNombre]<b[attrNombre] ? -1 : a[attrNombre]>b[attrNombre] ? 1 : 0}).forEach(function(obj) {
+    if (cant[obj[clave]] > 0) {
+//    var obj = nombres.find(function(n){return n[clave] == id});
+ //   if (obj) {
+      html += '<li><a href="#" dd="'+dd+'" data="'+obj[clave]+'">'+obj[attrNombre]+' ('+cant[obj[clave]]+')</a></li>';
+  //  }
     }
-  }
+  });
   // Actualizo el dropdown
   $("ul.dropdown-menu[dd="+dd+"]").html( html );
   // función para actualizar los dropdown-menu cuando el usuario selecciona una opción
