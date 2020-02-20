@@ -22,6 +22,6 @@
 
 module.exports.routes = {
 
-  '/': '/pizarron/index',
+  '/': 'http://servicios.ces.edu.uy/node/pizarron/pizarron/index',
 
 };
